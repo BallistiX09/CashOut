@@ -12,11 +12,11 @@ public class UIController : MonoBehaviour {
 
     private void Start()
     {
-        dateText.text = GenerateDateText();
+        UpdateDateText();
     }
 
-    private string GenerateDateText()
+    public void UpdateDateText()
     {
-        return " <b>Day " + GameController.currentDay.ToString() + "/30</b> | " + GameController.currentDate.ToString("MMMM d, yyyy");
+        dateText.text = " <b>Decision " + GameController.currentDay.ToString() + "/30</b> | " + GameController.currentDate.ToString("MMMM d, yyyy");
     }
 }
