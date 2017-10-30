@@ -1,16 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
 using UnityEngine;
 
 public class GameController : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    public static int cash = 0;
+    public static int mood = 0;
+    public static int savings = 0;
+    public static int currentDay = 1;
+    public static DateTime currentDate = System.DateTime.Now;
 }
