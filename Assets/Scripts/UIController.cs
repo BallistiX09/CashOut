@@ -15,6 +15,13 @@ public class UIController : MonoBehaviour {
         UpdateDateText();
     }
 
+    public void UpdateStatsText()
+    {
+        cashAmountText.text = "£" + GameController.cash.ToString();
+        savingsAmountText.text = "£" + GameController.savings.ToString();
+        moodAmountText.text = GameController.mood.ToString(); //To be updated to string descriptions of mood int
+    }
+
     public void UpdateDateText()
     {
         dateText.text = " <b>Decision " + GameController.currentDay.ToString() + "/30</b> | " + GameController.currentDate.ToString("MMMM d, yyyy");

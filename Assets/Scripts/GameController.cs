@@ -8,7 +8,6 @@ public class GameController : MonoBehaviour {
     public static int savings = 0;
     public static int currentDay = 1;
     public static DateTime currentDate = System.DateTime.Now;
-
     private UIController UIController;
 
     private void Start()
