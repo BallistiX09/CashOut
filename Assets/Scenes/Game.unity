@@ -588,15 +588,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12496e12ddc20ff4d8dfcd3cf3d1a164, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cashAmountText: {fileID: 1106269154}
-  moodAmountText: {fileID: 2138518671}
-  savingsAmountText: {fileID: 246841053}
-  dateText: {fileID: 1343967703}
-  eventTitleText: {fileID: 1418685985}
-  eventImage: {fileID: 800806630}
-  eventDescriptionText: {fileID: 1522259328}
-  leftChoiceButtonText: {fileID: 297007619}
-  rightChoiceButtonText: {fileID: 1563765999}
 --- !u!1 &627181947
 GameObject:
   m_ObjectHideFlags: 0
@@ -637,6 +628,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4eb81fc53a2bbd14989daf9564e8b505, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cashAmountText: {fileID: 1106269154}
+  moodAmountText: {fileID: 2138518671}
+  savingsAmountText: {fileID: 246841053}
+  dateText: {fileID: 1343967703}
+  eventTitleText: {fileID: 1418685985}
+  eventImage: {fileID: 800806630}
+  eventDescriptionText: {fileID: 1522259328}
+  leftChoiceButtonText: {fileID: 297007619}
+  rightChoiceButtonText: {fileID: 1563765999}
 --- !u!1 &707138843
 GameObject:
   m_ObjectHideFlags: 0
