@@ -8,6 +8,7 @@ public class UIController : MonoBehaviour {
     [SerializeField] private Text dateText;
     [SerializeField] private Text eventTitleText;
     [SerializeField] private Image eventImage;
+    [SerializeField] private Sprite[] eventImageTypes;
     [SerializeField] private Text eventDescriptionText;
     [SerializeField] private Text leftChoiceButtonText, rightChoiceButtonText;
 
@@ -22,14 +23,37 @@ public class UIController : MonoBehaviour {
     public void UpdateDateText()
     {
         //Updates the date text field with current game date information
-        dateText.text = " <b>Decision " + GameController.currentDay.ToString() + "/30</b> | " + GameController.currentDate.ToString("MMMM d, yyyy");
+        //TODO Switch to 30 days instead of 12
+        dateText.text = " <b>Decision " + GameController.currentDay.ToString() + "/12</b> | " + GameController.currentDate.ToString("MMMM d, yyyy");
     }
 
-    public void UpdateEventText()
+    public void UpdateEventInformation()
     {
         //Updates the event text fields with current event stats information
         eventTitleText.text = GameController.currentEvent.title;
         eventDescriptionText.text = GameController.currentEvent.description;
+
+        switch (GameController.currentEvent.image)
+        {
+            case RandomEvent.imageType.TYPE_1:
+                eventImage.sprite = eventImageTypes[0];
+                break;
+            case RandomEvent.imageType.TYPE_2:
+                eventImage.sprite = eventImageTypes[0];
+                break;
+            case RandomEvent.imageType.TYPE_3:
+                eventImage.sprite = eventImageTypes[0];
+                break;
+            case RandomEvent.imageType.TYPE_4:
+                eventImage.sprite = eventImageTypes[0];
+                break;
+            case RandomEvent.imageType.TYPE_5:
+                eventImage.sprite = eventImageTypes[0];
+                break;
+            case RandomEvent.imageType.TYPE_6:
+                eventImage.sprite = eventImageTypes[0];
+                break;
+        }
     }
 
     private string GetMoodDescription()

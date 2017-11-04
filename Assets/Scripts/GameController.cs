@@ -29,7 +29,7 @@ public class GameController : MonoBehaviour {
 
         //Update game UI with startup information
         UIController.UpdateDateText();
-        UIController.UpdateEventText();
+        UIController.UpdateEventInformation();
         UIController.UpdateStatsText();
     }
 
@@ -63,7 +63,7 @@ public class GameController : MonoBehaviour {
         
 
         UIController.UpdateDateText(); //Maybe switch to delegates for day update
-        UIController.UpdateEventText();
+        UIController.UpdateEventInformation();
 
         //Update income and expenses each time new month entered on specific dates
     }
@@ -71,6 +71,7 @@ public class GameController : MonoBehaviour {
     private void SetUpStats()
     {
         //Game stats are randomised each time to simulate real life uncertainty
+        //TODO Tweak amounts to balance gameplay when events added to game
         currentCash = (int)Mathf.Round((UnityEngine.Random.Range(200, 800)) / 10) * 10;
         currentSavings = (int)Mathf.Round((UnityEngine.Random.Range(0, 1000)) / 10) * 10;
         currentMood = UnityEngine.Random.Range(30, 70);
