@@ -13,7 +13,7 @@ public class GameController : MonoBehaviour {
     public static RandomEvent currentEvent, lastEvent;
 
     private UIController UIController;
-    private List<RandomEvent> events = new List<RandomEvent>();
+    [SerializeField] private List<RandomEvent> events = new List<RandomEvent>();
 
     private void Start()
     {
@@ -21,11 +21,10 @@ public class GameController : MonoBehaviour {
         UIController = FindObjectOfType<UIController>();
 
         //Set up variables for first startup
-        GenerateEvents();
         SetUpStats();
 
         //Select a random event from the list of events
-        currentEvent = events[UnityEngine.Random.Range(0, events.Count)];
+        currentEvent = events[0];
 
         //Update game UI with startup information
         UIController.UpdateDateText();
@@ -51,15 +50,21 @@ public class GameController : MonoBehaviour {
 
         currentDay++;
 
+        if(currentDay > 8){
+            UIController.EndGame();
+        }
+
         //Check if game finished here
         currentDate = currentDate.AddDays(UnityEngine.Random.Range(3, 6));
 
-        //Ensures two identical events don't trigger in a row
+        currentEvent = events[currentDay - 1];
+
+        /*//Ensures two identical events don't trigger in a row
         lastEvent = currentEvent;
         do
         {
             currentEvent = events[UnityEngine.Random.Range(0, events.Count)];
-        } while (currentEvent == lastEvent);
+        } while (currentEvent == lastEvent);*/
         
 
         UIController.UpdateDateText(); //Maybe switch to delegates for day update
@@ -75,70 +80,5 @@ public class GameController : MonoBehaviour {
         currentCash = (int)Mathf.Round((UnityEngine.Random.Range(200, 800)) / 10) * 10;
         currentSavings = (int)Mathf.Round((UnityEngine.Random.Range(0, 1000)) / 10) * 10;
         currentMood = UnityEngine.Random.Range(30, 70);
-    }
-
-    private void GenerateEvents()
-    {
-        //Each game event will be added below and stored in the events list
-
-        events.Add(new RandomEvent(
-            "Event 1", 
-            RandomEvent.imageType.TYPE_1, 
-            "Description"));
-
-        events.Add(new RandomEvent(
-            "Event 2", 
-            RandomEvent.imageType.TYPE_2, 
-            "Description"));
-
-        events.Add(new RandomEvent(
-            "Event 3", 
-            RandomEvent.imageType.TYPE_3, 
-            "Description"));
-
-        events.Add(new RandomEvent(
-            "Event 4", 
-            RandomEvent.imageType.TYPE_4, 
-            "Description"));
-
-        events.Add(new RandomEvent(
-            "Event 5", 
-            RandomEvent.imageType.TYPE_5, 
-            "Description"));
-
-        events.Add(new RandomEvent(
-            "Event 6", 
-            RandomEvent.imageType.TYPE_6, 
-            "Description"));
-
-        events.Add(new RandomEvent(
-            "Event 7", 
-            RandomEvent.imageType.TYPE_1, 
-            "Description"));
-
-        events.Add(new RandomEvent(
-            "Event 8", 
-            RandomEvent.imageType.TYPE_2, 
-            "Description"));
-
-        events.Add(new RandomEvent(
-            "Event 9", 
-            RandomEvent.imageType.TYPE_3, 
-            "Description"));
-
-        events.Add(new RandomEvent(
-            "Event 10", 
-            RandomEvent.imageType.TYPE_4, 
-            "Description"));
-
-        events.Add(new RandomEvent(
-            "Event 11", 
-            RandomEvent.imageType.TYPE_5, 
-            "Description"));
-
-        events.Add(new RandomEvent(
-            "Event 12", 
-            RandomEvent.imageType.TYPE_6, 
-            "Description"));
     }
 }

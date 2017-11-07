@@ -11,6 +11,11 @@ public class UIController : MonoBehaviour {
     [SerializeField] private Sprite[] eventImageTypes;
     [SerializeField] private Text eventDescriptionText;
     [SerializeField] private Text leftChoiceButtonText, rightChoiceButtonText;
+    [SerializeField] private GameObject backgroundPanel;
+
+    public void EndGame(){
+        backgroundPanel.SetActive(false);
+    }
 
     public void UpdateStatsText()
     {
@@ -24,7 +29,7 @@ public class UIController : MonoBehaviour {
     {
         //Updates the date text field with current game date information
         //TODO Switch to 30 days instead of 12
-        dateText.text = " <b>Decision " + GameController.currentDay.ToString() + "/12</b> | " + GameController.currentDate.ToString("MMMM d, yyyy");
+        dateText.text = " <b>Decision " + GameController.currentDay.ToString() + "/8</b> | " + GameController.currentDate.ToString("MMMM d, yyyy");
     }
 
     public void UpdateEventInformation()

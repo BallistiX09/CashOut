@@ -1,4 +1,5 @@
 ﻿//RandomEvent containing a title, image, and description
+[System.Serializable]
 public class RandomEvent
 {
     //Contains every image type for each matching event category
