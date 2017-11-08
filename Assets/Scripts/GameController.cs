@@ -42,11 +42,13 @@ public class GameController : MonoBehaviour
     {
         if (animationController.GetCurrentAnimatorStateInfo(0).IsName("Cards Out Idle") || animationController.GetCurrentAnimatorStateInfo(0).IsName("Cards In Idle"))
         {
-            //TODO Updated to relate to yes or no button press, currently used as debug only
+            //TODO Update to relate to yes or no button press, currently used as debug only
+            //Update stats text, using animations and setting the new value after animation is complete
             UIController.StartCoroutine("AnimateCashText", currentCash + currentEvent.moneyEffect / 2);
             UIController.StartCoroutine("AnimateSavingsText", Mathf.Clamp(currentSavings + currentEvent.moneyEffect / 2, 0, 100000));
-            currentMood = Mathf.Clamp(currentMood += currentEvent.moodEffect, 0, 100);
 
+            //Update mood value and mood text animation
+            currentMood = Mathf.Clamp(currentMood += currentEvent.moodEffect, 0, 100);
             UIController.UpdateMoodText();
 
             animationController.SetTrigger("CardsOut");
@@ -58,10 +60,12 @@ public class GameController : MonoBehaviour
         if (animationController.GetCurrentAnimatorStateInfo(0).IsName("Cards Out Idle") || animationController.GetCurrentAnimatorStateInfo(0).IsName("Cards In Idle"))
         {
             //TODO Updated to relate to yes or no button press, currently used as debug only
+            //Update stats text, using animations and setting the new value after animation is complete
             UIController.StartCoroutine("AnimateCashText", currentCash + currentEvent.moneyEffect / 2);
             UIController.StartCoroutine("AnimateSavingsText", Mathf.Clamp(currentSavings + currentEvent.moneyEffect / 2, 0, 100000));
-            currentMood = Mathf.Clamp(currentMood += currentEvent.moodEffect, 0, 100);
 
+            //Update mood value and mood text animation
+            currentMood = Mathf.Clamp(currentMood += currentEvent.moodEffect, 0, 100);
             UIController.UpdateMoodText();
 
             animationController.SetTrigger("CardsOut");
