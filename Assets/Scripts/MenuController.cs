@@ -31,6 +31,8 @@ public class MenuController : MonoBehaviour
 
             //Starts panel slide in animation
             optionsPanel.GetComponent<Animator>().SetTrigger("PanelIn");
+
+            //TODO Set up toggles in options panel
         }
     }
 
