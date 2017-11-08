@@ -13,7 +13,10 @@ public class GameController : MonoBehaviour {
     public static RandomEvent currentEvent, lastEvent;
 
     private UIController UIController;
-    private List<RandomEvent> events = new List<RandomEvent>();
+    [SerializeField] private Animator animationController;
+
+    [SerializeField] private List<RandomEvent> randomEvents = new List<RandomEvent>();
+    //TODO Add linked events and non-interactive events
 
     private void Start()
     {
@@ -21,11 +24,10 @@ public class GameController : MonoBehaviour {
         UIController = FindObjectOfType<UIController>();
 
         //Set up variables for first startup
-        GenerateEvents();
         SetUpStats();
 
         //Select a random event from the list of events
-        currentEvent = events[UnityEngine.Random.Range(0, events.Count)];
+        currentEvent = randomEvents[UnityEngine.Random.Range(0, randomEvents.Count)];
 
         //Update game UI with startup information
         UIController.UpdateDateText();
@@ -35,17 +37,21 @@ public class GameController : MonoBehaviour {
 
     public void ButtonNoPressed()
     {
-        //Trigger a new game day
-        NextDay();
+        if(animationController.GetCurrentAnimatorStateInfo(0).IsName("Cards Out Idle") || animationController.GetCurrentAnimatorStateInfo(0).IsName("Cards In Idle"))
+        {
+            animationController.SetTrigger("CardsOut");
+        }
     }
 
     public void ButtonYesPressed()
     {
-        //Trigger a new game day
-        NextDay();
+        if (animationController.GetCurrentAnimatorStateInfo(0).IsName("Cards Out Idle") || animationController.GetCurrentAnimatorStateInfo(0).IsName("Cards In Idle"))
+        {
+            animationController.SetTrigger("CardsOut");
+        }
     }
 
-    private void NextDay()
+    public void NextDay()
     {
         //40 interactive days total, with random non-interactive events mixed throughout
 
@@ -58,7 +64,7 @@ public class GameController : MonoBehaviour {
         lastEvent = currentEvent;
         do
         {
-            currentEvent = events[UnityEngine.Random.Range(0, events.Count)];
+            currentEvent = randomEvents[UnityEngine.Random.Range(0, randomEvents.Count)];
         } while (currentEvent == lastEvent);
         
 
@@ -66,6 +72,8 @@ public class GameController : MonoBehaviour {
         UIController.UpdateEventInformation();
 
         //Update income and expenses each time new month entered on specific dates
+
+        animationController.SetTrigger("CardsIn");
     }
 
     private void SetUpStats()
@@ -75,70 +83,5 @@ public class GameController : MonoBehaviour {
         currentCash = (int)Mathf.Round((UnityEngine.Random.Range(200, 800)) / 10) * 10;
         currentSavings = (int)Mathf.Round((UnityEngine.Random.Range(0, 1000)) / 10) * 10;
         currentMood = UnityEngine.Random.Range(30, 70);
-    }
-
-    private void GenerateEvents()
-    {
-        //Each game event will be added below and stored in the events list
-
-        events.Add(new RandomEvent(
-            "Event 1", 
-            RandomEvent.imageType.TYPE_1, 
-            "Description"));
-
-        events.Add(new RandomEvent(
-            "Event 2", 
-            RandomEvent.imageType.TYPE_2, 
-            "Description"));
-
-        events.Add(new RandomEvent(
-            "Event 3", 
-            RandomEvent.imageType.TYPE_3, 
-            "Description"));
-
-        events.Add(new RandomEvent(
-            "Event 4", 
-            RandomEvent.imageType.TYPE_4, 
-            "Description"));
-
-        events.Add(new RandomEvent(
-            "Event 5", 
-            RandomEvent.imageType.TYPE_5, 
-            "Description"));
-
-        events.Add(new RandomEvent(
-            "Event 6", 
-            RandomEvent.imageType.TYPE_6, 
-            "Description"));
-
-        events.Add(new RandomEvent(
-            "Event 7", 
-            RandomEvent.imageType.TYPE_1, 
-            "Description"));
-
-        events.Add(new RandomEvent(
-            "Event 8", 
-            RandomEvent.imageType.TYPE_2, 
-            "Description"));
-
-        events.Add(new RandomEvent(
-            "Event 9", 
-            RandomEvent.imageType.TYPE_3, 
-            "Description"));
-
-        events.Add(new RandomEvent(
-            "Event 10", 
-            RandomEvent.imageType.TYPE_4, 
-            "Description"));
-
-        events.Add(new RandomEvent(
-            "Event 11", 
-            RandomEvent.imageType.TYPE_5, 
-            "Description"));
-
-        events.Add(new RandomEvent(
-            "Event 12", 
-            RandomEvent.imageType.TYPE_6, 
-            "Description"));
     }
 }

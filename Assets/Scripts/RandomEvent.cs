@@ -1,4 +1,5 @@
 ﻿//RandomEvent containing a title, image, and description
+[System.Serializable]
 public class RandomEvent
 {
     //Contains every image type for each matching event category
@@ -8,11 +9,15 @@ public class RandomEvent
     public string title;
     public imageType image;
     public string description;
+    public int moneyEffect;
+    public int moodEffect;
 
-    public RandomEvent(string title, imageType image, string description) //Constructor for RandomEvent object
+    /*public RandomEvent(string title, imageType image, string description, int moneyEffect, int moodEffect) //Constructor for RandomEvent object, no longer needed
     {
         this.title = title;
         this.image = image;
         this.description = description;
-    }
+        this.moneyEffect = moneyEffect;
+        this.moodEffect = moodEffect;
+    }*/
 }
