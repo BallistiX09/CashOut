@@ -249,6 +249,7 @@ GameObject:
   - component: {fileID: 123953623}
   - component: {fileID: 123953625}
   - component: {fileID: 123953624}
+  - component: {fileID: 123953626}
   m_Layer: 5
   m_Name: Savings Title
   m_TagString: Untagged
@@ -313,6 +314,23 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 123953622}
+--- !u!95 &123953626
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 123953622}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f402176ca30aa9d4ea26f9d256dc2a9a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1 &194901877
 GameObject:
   m_ObjectHideFlags: 0
@@ -395,6 +413,7 @@ GameObject:
   - component: {fileID: 246841052}
   - component: {fileID: 246841054}
   - component: {fileID: 246841053}
+  - component: {fileID: 246841055}
   m_Layer: 5
   m_Name: Savings Amount
   m_TagString: Untagged
@@ -459,6 +478,23 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 246841051}
+--- !u!95 &246841055
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 246841051}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f402176ca30aa9d4ea26f9d256dc2a9a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1 &297007617
 GameObject:
   m_ObjectHideFlags: 0
@@ -624,28 +660,28 @@ MonoBehaviour:
   - title: Event 1
     image: 0
     description: Event 1
-    moneyEffect: 0
-    moodEffect: 0
+    moneyEffect: 100
+    moodEffect: -20
   - title: Event 2
     image: 0
     description: Event 2
-    moneyEffect: 0
-    moodEffect: 0
+    moneyEffect: -100
+    moodEffect: -20
   - title: Event 3
     image: 0
     description: Event 3
-    moneyEffect: 0
-    moodEffect: 0
+    moneyEffect: 300
+    moodEffect: 30
   - title: Event 4
     image: 0
     description: Event 4
-    moneyEffect: 0
-    moodEffect: 0
+    moneyEffect: -300
+    moodEffect: 30
   - title: Event 5
     image: 0
     description: Event 5
-    moneyEffect: 0
-    moodEffect: 0
+    moneyEffect: 1000
+    moodEffect: -50
 --- !u!1 &627181947
 GameObject:
   m_ObjectHideFlags: 0
@@ -697,6 +733,12 @@ MonoBehaviour:
   eventDescriptionText: {fileID: 1522259328}
   leftChoiceButtonText: {fileID: 297007619}
   rightChoiceButtonText: {fileID: 1563765999}
+  statCashTitleAnim: {fileID: 1212660013}
+  statCashAmountAnim: {fileID: 1106269156}
+  statMoodTitleAnim: {fileID: 2089662992}
+  statMoodAmountAnim: {fileID: 2138518673}
+  statSavingsTitleAnim: {fileID: 123953626}
+  statSavingsAmountAnim: {fileID: 246841055}
 --- !u!1 &707138843
 GameObject:
   m_ObjectHideFlags: 0
@@ -974,6 +1016,7 @@ GameObject:
   - component: {fileID: 1106269153}
   - component: {fileID: 1106269155}
   - component: {fileID: 1106269154}
+  - component: {fileID: 1106269156}
   m_Layer: 5
   m_Name: Cash Amount
   m_TagString: Untagged
@@ -1038,6 +1081,23 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1106269152}
+--- !u!95 &1106269156
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1106269152}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f402176ca30aa9d4ea26f9d256dc2a9a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1 &1212660009
 GameObject:
   m_ObjectHideFlags: 0
@@ -1048,6 +1108,7 @@ GameObject:
   - component: {fileID: 1212660010}
   - component: {fileID: 1212660012}
   - component: {fileID: 1212660011}
+  - component: {fileID: 1212660013}
   m_Layer: 5
   m_Name: Cash Title
   m_TagString: Untagged
@@ -1112,6 +1173,23 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1212660009}
+--- !u!95 &1212660013
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1212660009}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f402176ca30aa9d4ea26f9d256dc2a9a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1 &1343967701
 GameObject:
   m_ObjectHideFlags: 0
@@ -1179,7 +1257,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: <b>Decision x/12</b> | Month Day, Year
+  m_Text: <b>Decision x/30</b> | Month Day, Year
 --- !u!222 &1343967704
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1701,6 +1779,7 @@ GameObject:
   - component: {fileID: 2089662989}
   - component: {fileID: 2089662991}
   - component: {fileID: 2089662990}
+  - component: {fileID: 2089662992}
   m_Layer: 5
   m_Name: Mood Title
   m_TagString: Untagged
@@ -1765,6 +1844,23 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2089662988}
+--- !u!95 &2089662992
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2089662988}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f402176ca30aa9d4ea26f9d256dc2a9a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1 &2138518669
 GameObject:
   m_ObjectHideFlags: 0
@@ -1775,6 +1871,7 @@ GameObject:
   - component: {fileID: 2138518670}
   - component: {fileID: 2138518672}
   - component: {fileID: 2138518671}
+  - component: {fileID: 2138518673}
   m_Layer: 5
   m_Name: Mood Amount
   m_TagString: Untagged
@@ -1839,3 +1936,20 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2138518669}
+--- !u!95 &2138518673
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2138518669}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f402176ca30aa9d4ea26f9d256dc2a9a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1

@@ -1,9 +1,10 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameController : MonoBehaviour {
-
+public class GameController : MonoBehaviour
+{
     //Globally-accessible variables keeping track of current game state
     public static int currentCash = 0;
     public static int currentMood = 0; //Mood based on int value from 0 to 100, with 50 being neutral
@@ -11,15 +12,17 @@ public class GameController : MonoBehaviour {
     public static int currentDay = 1;
     public static DateTime currentDate = System.DateTime.Now;
     public static RandomEvent currentEvent, lastEvent;
-
     private UIController UIController;
     [SerializeField] private Animator animationController;
 
-    [SerializeField] private List<RandomEvent> randomEvents = new List<RandomEvent>();
     //TODO Add linked events and non-interactive events
+    [SerializeField] private List<RandomEvent> randomEvents = new List<RandomEvent>();
 
     private void Start()
     {
+        //Sets the target game framerate
+        Application.targetFrameRate = 45;
+
         //Finds a reference to UI Controller for future usage
         UIController = FindObjectOfType<UIController>();
 
@@ -32,13 +35,20 @@ public class GameController : MonoBehaviour {
         //Update game UI with startup information
         UIController.UpdateDateText();
         UIController.UpdateEventInformation();
-        UIController.UpdateStatsText();
+        UIController.UpdateAllStatsText();
     }
 
     public void ButtonNoPressed()
     {
-        if(animationController.GetCurrentAnimatorStateInfo(0).IsName("Cards Out Idle") || animationController.GetCurrentAnimatorStateInfo(0).IsName("Cards In Idle"))
+        if (animationController.GetCurrentAnimatorStateInfo(0).IsName("Cards Out Idle") || animationController.GetCurrentAnimatorStateInfo(0).IsName("Cards In Idle"))
         {
+            //TODO Updated to relate to yes or no button press, currently used as debug only
+            UIController.StartCoroutine("AnimateCashText", currentCash + currentEvent.moneyEffect / 2);
+            UIController.StartCoroutine("AnimateSavingsText", Mathf.Clamp(currentSavings + currentEvent.moneyEffect / 2, 0, 100000));
+            currentMood = Mathf.Clamp(currentMood += currentEvent.moodEffect, 0, 100);
+
+            UIController.UpdateMoodText();
+
             animationController.SetTrigger("CardsOut");
         }
     }
@@ -47,6 +57,13 @@ public class GameController : MonoBehaviour {
     {
         if (animationController.GetCurrentAnimatorStateInfo(0).IsName("Cards Out Idle") || animationController.GetCurrentAnimatorStateInfo(0).IsName("Cards In Idle"))
         {
+            //TODO Updated to relate to yes or no button press, currently used as debug only
+            UIController.StartCoroutine("AnimateCashText", currentCash + currentEvent.moneyEffect / 2);
+            UIController.StartCoroutine("AnimateSavingsText", Mathf.Clamp(currentSavings + currentEvent.moneyEffect / 2, 0, 100000));
+            currentMood = Mathf.Clamp(currentMood += currentEvent.moodEffect, 0, 100);
+
+            UIController.UpdateMoodText();
+
             animationController.SetTrigger("CardsOut");
         }
     }
@@ -57,7 +74,8 @@ public class GameController : MonoBehaviour {
 
         currentDay++;
 
-        //Check if game finished here
+        //TODO Check if game finished here
+
         currentDate = currentDate.AddDays(UnityEngine.Random.Range(3, 6));
 
         //Ensures two identical events don't trigger in a row
@@ -66,12 +84,12 @@ public class GameController : MonoBehaviour {
         {
             currentEvent = randomEvents[UnityEngine.Random.Range(0, randomEvents.Count)];
         } while (currentEvent == lastEvent);
-        
 
-        UIController.UpdateDateText(); //Maybe switch to delegates for day update
+        //TODO Maybe switch to delegates for day update
+        UIController.UpdateDateText();
         UIController.UpdateEventInformation();
 
-        //Update income and expenses each time new month entered on specific dates
+        //TODO Update income and expenses each time new month entered on specific dates
 
         animationController.SetTrigger("CardsIn");
     }
@@ -80,8 +98,8 @@ public class GameController : MonoBehaviour {
     {
         //Game stats are randomised each time to simulate real life uncertainty
         //TODO Tweak amounts to balance gameplay when events added to game
-        currentCash = (int)Mathf.Round((UnityEngine.Random.Range(200, 800)) / 10) * 10;
-        currentSavings = (int)Mathf.Round((UnityEngine.Random.Range(0, 1000)) / 10) * 10;
+        currentCash = (int)Mathf.Round((UnityEngine.Random.Range(150, 400)) / 10) * 10;
+        currentSavings = (int)Mathf.Round((UnityEngine.Random.Range(0, 250)) / 10) * 10;
         currentMood = UnityEngine.Random.Range(30, 70);
     }
 }
