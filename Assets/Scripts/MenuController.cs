@@ -6,16 +6,21 @@ using UnityEngine.SceneManagement;
 public class MenuController : MonoBehaviour
 {
     public GameObject currentPanel;
+    private AudioSource buttonClickAudioSource;
     [SerializeField] private GameObject optionsPanel, aboutPanel;
 
     private void Start()
     {
         //Sets the target game framerate
         Application.targetFrameRate = 45;
+
+        buttonClickAudioSource = GetComponent<AudioSource>();
     }
 
     public void ButtonPlayPressed()
     {
+        buttonClickAudioSource.Play();
+
         //Loads the game scene when the play button is pressed
         SceneManager.LoadScene("Game");
     }
@@ -25,6 +30,8 @@ public class MenuController : MonoBehaviour
         //Stops function triggering if another panel animation is in progress
         if(currentPanel == null)
         {
+            buttonClickAudioSource.Play();
+
             //Keeps track of currently selected panel
             currentPanel = optionsPanel;
             optionsPanel.SetActive(true);
@@ -40,6 +47,8 @@ public class MenuController : MonoBehaviour
     {
         if (currentPanel == null)
         {
+            buttonClickAudioSource.Play();
+
             currentPanel = aboutPanel;
             aboutPanel.SetActive(true);
             aboutPanel.GetComponent<Animator>().SetTrigger("PanelIn");
@@ -50,11 +59,13 @@ public class MenuController : MonoBehaviour
     {
         //Triggers the panel slide out animation
         optionsPanel.GetComponent<Animator>().SetTrigger("PanelOut");
+        buttonClickAudioSource.Play();
     }
 
     public void AboutClosePressed()
     {
         aboutPanel.GetComponent<Animator>().SetTrigger("PanelOut");
+        buttonClickAudioSource.Play();
     }
 
     public void DisableCurrentPanel()

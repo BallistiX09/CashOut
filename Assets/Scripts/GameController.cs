@@ -13,6 +13,7 @@ public class GameController : MonoBehaviour
     public static DateTime currentDate = System.DateTime.Now;
     public static RandomEvent currentEvent, lastEvent;
     private UIController UIController;
+    private AudioSource buttonClickAudioSource;
     [SerializeField] private Animator animationController;
 
     //TODO Add linked events and non-interactive events
@@ -23,8 +24,9 @@ public class GameController : MonoBehaviour
         //Sets the target game framerate
         Application.targetFrameRate = 45;
 
-        //Finds a reference to UI Controller for future usage
+        //Finds a reference to UI Controller and button click audio source
         UIController = FindObjectOfType<UIController>();
+        buttonClickAudioSource = GetComponent<AudioSource>();
 
         //Set up variables for first startup
         SetUpStats();
@@ -42,6 +44,8 @@ public class GameController : MonoBehaviour
     {
         if (animationController.GetCurrentAnimatorStateInfo(0).IsName("Cards Out Idle") || animationController.GetCurrentAnimatorStateInfo(0).IsName("Cards In Idle"))
         {
+            buttonClickAudioSource.Play();
+
             //TODO Update to relate to yes or no button press, currently used as debug only
             //Update stats text, using animations and setting the new value after animation is complete
             UIController.StartCoroutine("AnimateCashText", currentCash + currentEvent.moneyEffect / 2);
@@ -59,6 +63,8 @@ public class GameController : MonoBehaviour
     {
         if (animationController.GetCurrentAnimatorStateInfo(0).IsName("Cards Out Idle") || animationController.GetCurrentAnimatorStateInfo(0).IsName("Cards In Idle"))
         {
+            buttonClickAudioSource.Play();
+
             //TODO Updated to relate to yes or no button press, currently used as debug only
             //Update stats text, using animations and setting the new value after animation is complete
             UIController.StartCoroutine("AnimateCashText", currentCash + currentEvent.moneyEffect / 2);
