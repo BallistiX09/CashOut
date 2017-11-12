@@ -1,13 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class MenuController : MonoBehaviour
 {
     public GameObject currentPanel;
     private AudioSource buttonClickAudioSource;
+    private bool soundsEnabled = true, musicEnabled = true;
     [SerializeField] private GameObject optionsPanel, aboutPanel;
+    [SerializeField] private Toggle soundToggle, musicToggle;
 
     private void Start()
     {
@@ -84,5 +87,53 @@ public class MenuController : MonoBehaviour
             aboutPanel.SetActive(false);
             currentPanel = null;
         }
+    }
+
+    public void OptionsSoundTogglePressed()
+    {
+        if (soundToggle.isOn)
+        {
+            soundToggle.isOn = false;
+            DisableSounds();
+        }
+        else
+        {
+            soundToggle.isOn = true;
+            EnableSounds();
+        }
+    }
+
+    public void OptionsMusicTogglePressed()
+    {
+        if (musicToggle.isOn)
+        {
+            musicToggle.isOn = false;
+            DisableMusic();
+        }
+        else
+        {
+            musicToggle.isOn = true;
+            EnableMusic();
+        }
+    }
+
+    private void EnableSounds()
+    {
+        Debug.Log("Sounds On");
+    }
+
+    private void DisableSounds()
+    {
+        Debug.Log("Sounds Off");
+    }
+
+    private void EnableMusic()
+    {
+        Debug.Log("Music On");
+    }
+
+    private void DisableMusic()
+    {
+        Debug.Log("Music On");
     }
 }
