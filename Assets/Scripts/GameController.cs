@@ -41,11 +41,11 @@ public class GameController : MonoBehaviour
         UIController.UpdateAllStatsText();
     }
 
-    public void ButtonNoPressed()
+    private void ButtonNoPressed()
     {
         if (animationController.GetCurrentAnimatorStateInfo(0).IsName("Cards Out Idle") || animationController.GetCurrentAnimatorStateInfo(0).IsName("Cards In Idle"))
         {
-            buttonClickAudioSource.Play();
+            PlayButtonClickSound();
 
             //TODO Update to relate to yes or no button press, currently used as debug only
             //Update stats text, using animations and setting the new value after animation is complete
@@ -60,11 +60,11 @@ public class GameController : MonoBehaviour
         }
     }
 
-    public void ButtonYesPressed()
+    private void ButtonYesPressed()
     {
         if (animationController.GetCurrentAnimatorStateInfo(0).IsName("Cards Out Idle") || animationController.GetCurrentAnimatorStateInfo(0).IsName("Cards In Idle"))
         {
-            buttonClickAudioSource.Play();
+            PlayButtonClickSound();
 
             //TODO Updated to relate to yes or no button press, currently used as debug only
             //Update stats text, using animations and setting the new value after animation is complete
@@ -112,5 +112,14 @@ public class GameController : MonoBehaviour
         currentCash = (int)Mathf.Round((UnityEngine.Random.Range(150, 400)) / 10) * 10;
         currentSavings = (int)Mathf.Round((UnityEngine.Random.Range(0, 250)) / 10) * 10;
         currentMood = UnityEngine.Random.Range(30, 70);
+    }
+
+    private void PlayButtonClickSound()
+    {
+        //Only plays sound if enabled in player options
+        if (soundsEnabled)
+        {
+            buttonClickAudioSource.Play();
+        }
     }
 }
