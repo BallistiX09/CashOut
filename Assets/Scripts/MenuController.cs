@@ -93,12 +93,10 @@ public class MenuController : MonoBehaviour
     {
         if (soundToggle.isOn)
         {
-            soundToggle.isOn = false;
             DisableSounds();
         }
         else
         {
-            soundToggle.isOn = true;
             EnableSounds();
         }
     }
@@ -107,33 +105,31 @@ public class MenuController : MonoBehaviour
     {
         if (musicToggle.isOn)
         {
-            musicToggle.isOn = false;
             DisableMusic();
         }
         else
         {
-            musicToggle.isOn = true;
             EnableMusic();
         }
     }
 
     private void EnableSounds()
     {
-        Debug.Log("Sounds On");
+
     }
 
     private void DisableSounds()
     {
-        Debug.Log("Sounds Off");
+
     }
 
     private void EnableMusic()
     {
-        Debug.Log("Music On");
+
     }
 
     private void DisableMusic()
     {
-        Debug.Log("Music On");
+
     }
 }

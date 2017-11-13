@@ -10,6 +10,7 @@ public class GameController : MonoBehaviour
     public static int currentMood = 0; //Mood based on int value from 0 to 100, with 50 being neutral
     public static int currentSavings = 0;
     public static int currentDay = 1;
+    private bool soundsEnabled = true, musicEnabled = true;
     public static DateTime currentDate = System.DateTime.Now;
     public static RandomEvent currentEvent, lastEvent;
     private UIController UIController;
