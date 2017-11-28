@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311918, g: 0.38073993, b: 0.358727, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -780,6 +780,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animationController: {fileID: 48177072}
+  currentEvents: []
   mandatoryEvents:
   - ID: 3
     title: Get A Car
@@ -2449,7 +2450,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: <b>Decision x/30</b> | Month Day, Year
+  m_Text: <b>Decision x/20</b> | Month Day, Year
 --- !u!222 &1343967704
 CanvasRenderer:
   m_ObjectHideFlags: 0

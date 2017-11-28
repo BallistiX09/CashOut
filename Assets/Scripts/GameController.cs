@@ -19,7 +19,7 @@ public class GameController : MonoBehaviour
     private AudioSource buttonClickAudioSource;
     [SerializeField] private Animator animationController;
 
-    private List<RandomEvent> currentEvents = new List<RandomEvent>(); //Event pool for use in gameplay, uses a mixture of mandatory and random events
+    [SerializeField] private List<RandomEvent> currentEvents = new List<RandomEvent>(); //Event pool for use in gameplay, uses a mixture of mandatory and random events
     [SerializeField] private List<RandomEvent> mandatoryEvents = new List<RandomEvent>(); //Events which will always happen with every playthrough
     [SerializeField] private List<RandomEvent> randomEvents = new List<RandomEvent>(); //Random events which may or may not be in a particular game
     [SerializeField] private List<UncontrolledEvent> uncontrolledEvents = new List<UncontrolledEvent>(); //Events which the user has no decision over and can only accept
@@ -57,13 +57,18 @@ public class GameController : MonoBehaviour
     {
         //Randomly removes 12 items from the random events list
         //Will bring list down to 23 items, which combined with the 7 mandatory events will bring the list to 30
-        for(int i = 0; i < 12; i++)
+        for(int i = 0; i < 22; i++)
         {
             randomEvents.RemoveAt(UnityEngine.Random.Range(0, randomEvents.Count));
         }
 
         //Copies the mandatory events into a temporary list
-        List<RandomEvent> tempEventsList = mandatoryEvents;
+        List<RandomEvent> tempEventsList = new List<RandomEvent>();
+
+        for (int i = 0; i < mandatoryEvents.Count; i++)
+        {
+            tempEventsList.Add(mandatoryEvents[i]);
+        }
 
         //Copies the remaining random events into the temporary list
         for (int i = 0; i < randomEvents.Count; i++)
@@ -141,7 +146,7 @@ public class GameController : MonoBehaviour
         currentDay++;
 
         //TODO Check if game finished here
-        if(currentDay == 30)
+        if(currentDay == 20)
         {
             UIController.EndGame();
         }
@@ -172,7 +177,7 @@ public class GameController : MonoBehaviour
     {
         //Game stats are randomised each time to simulate real life uncertainty
         //TODO Tweak amounts to balance gameplay when events added to game
-        currentCash = (int)Mathf.Round((UnityEngine.Random.Range(150, 400)) / 10) * 10;
+        currentCash = (int)Mathf.Round((UnityEngine.Random.Range(150, 600)) / 10) * 10;
         currentMood = UnityEngine.Random.Range(-50, 50);
         currentStudyHours = UnityEngine.Random.Range(20, 28);
     }

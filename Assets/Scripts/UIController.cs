@@ -125,7 +125,7 @@ public class UIController : MonoBehaviour
     //Updates the date text field with current game date information
     public void UpdateDateText()
     {
-        dateText.text = " <b>Decision " + (GameController.currentDay + 1).ToString() + "/30</b> | " + GameController.currentDate.ToString("MMMM d, yyyy");
+        dateText.text = " <b>Decision " + (GameController.currentDay + 1).ToString() + "/20</b> | " + GameController.currentDate.ToString("MMMM d, yyyy");
     }
 
     //Updates the event text fields with current event stats information
