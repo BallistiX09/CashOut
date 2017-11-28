@@ -3,14 +3,21 @@
 public class RandomEvent
 {
     //Contains every image type for each matching event category
-    public enum imageType { TYPE_1, TYPE_2, TYPE_3, TYPE_4, TYPE_5, TYPE_6 };
+    public enum imageType { TRANSPORT, ENTERTAINMENT, FINANCIAL, WORK, GAMBLING, SOCIAL, TECHNOLOGY, GAMING, SHOPPING, FOOD, EDUCATION };
 
     //Publicly accessible RandomEvent parameters
+    public int ID;
     public string title;
     public imageType image;
     public string description;
-    public int moneyEffect;
-    public int moodEffect;
+    public int yesMoneyInstantEffect;
+    public int yesMoneyMonthlyEffect;
+    public int yesMoodEffect;
+    public int yesStudyEffect;
+    public int noMoneyInstantEffect;
+    public int noMoneyMonthlyEffect;
+    public int noMoodEffect;
+    public int noStudyEffect;
 
     /*public RandomEvent(string title, imageType image, string description, int moneyEffect, int moodEffect) //Constructor for RandomEvent object, no longer needed
     {
