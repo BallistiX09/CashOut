@@ -18,7 +18,10 @@ public class GameController : MonoBehaviour
     private UIController UIController;
     private AudioSource buttonClickAudioSource;
     [SerializeField] private Animator animationController;
-
+    [SerializeField] private List<Debit> possibleDebits = new List<Debit>();
+    [SerializeField] private List<Debit> currentDebits = new List<Debit>();
+    [SerializeField] private List<Income> possibleIncome = new List<Income>();
+    [SerializeField] private List<Income> currentIncome = new List<Income>();
     [SerializeField] private List<RandomEvent> currentEvents = new List<RandomEvent>(); //Event pool for use in gameplay, uses a mixture of mandatory and random events
     [SerializeField] private List<RandomEvent> mandatoryEvents = new List<RandomEvent>(); //Events which will always happen with every playthrough
     [SerializeField] private List<RandomEvent> randomEvents = new List<RandomEvent>(); //Random events which may or may not be in a particular game
@@ -40,6 +43,8 @@ public class GameController : MonoBehaviour
 
         //Set up variables for first startup
         SetUpStats();
+        SetUpIncome();
+        SetUpDebits();
 
         //Sets up the pool of events to be used in-game
         BuildEventsList();
@@ -180,6 +185,24 @@ public class GameController : MonoBehaviour
         currentCash = (int)Mathf.Round((UnityEngine.Random.Range(150, 600)) / 10) * 10;
         currentMood = UnityEngine.Random.Range(-50, 50);
         currentStudyHours = UnityEngine.Random.Range(20, 28);
+    }
+
+    private void SetUpIncome()
+    {
+        currentIncome.Add(possibleIncome[0]); //Student loan
+        currentIncome.Add(possibleIncome[1]); //Work
+    }
+
+    private void SetUpDebits()
+    {
+        currentDebits.Add(possibleDebits[1]); //TV Licence
+        currentDebits.Add(possibleDebits[5]); //Public transport
+        currentDebits.Add(possibleDebits[6]); //Phone contract
+        currentDebits.Add(possibleDebits[7]); //Shopping
+        currentDebits.Add(possibleDebits[10]); //Internet
+        currentDebits.Add(possibleDebits[11]); //Game addons
+        currentDebits.Add(possibleDebits[12]); //Rent
+        currentDebits.Add(possibleDebits[14]); //TV and landline
     }
 
     private void PlayButtonClickSound()
