@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311918, g: 0.38073993, b: 0.358727, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -196,8 +196,8 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 48177067}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 181.5, y: 323, z: 0}
-  m_LocalScale: {x: 0.3361111, y: 0.3361111, z: 0.3361111}
+  m_LocalPosition: {x: 540, y: 960, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2000826168}
   - {fileID: 194901878}
@@ -265,7 +265,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 123953622}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 330, y: 53.38934, z: 0}
+  m_LocalPosition: {x: 330, y: 53.334255, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2000826168}
@@ -356,7 +356,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 194901877}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 25.025818, z: 0}
+  m_LocalPosition: {x: 0, y: 25, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1343967702}
@@ -429,7 +429,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 246841051}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 330, y: -53.4027, z: 0}
+  m_LocalPosition: {x: 330, y: -53.347603, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2000826168}
@@ -593,7 +593,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 315803504}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.000030517578, y: 165.1778, z: 0}
+  m_LocalPosition: {x: 0.000030517578, y: 165.00732, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 800806628}
@@ -641,7 +641,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 506408745}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.000030517578, y: -609.4338, z: 0}
+  m_LocalPosition: {x: -0.000030517578, y: -608.8048, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1547142526}
@@ -780,6 +780,67 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animationController: {fileID: 48177072}
+  possibleDebits:
+  - name: Car
+    debitCategory: 0
+    monthlyCost: -120
+  - name: TV Licence
+    debitCategory: 1
+    monthlyCost: -12
+  - name: Credit Card
+    debitCategory: 2
+    monthlyCost: -100
+  - name: Phone Insurance
+    debitCategory: 2
+    monthlyCost: -10
+  - name: Payday Loan
+    debitCategory: 2
+    monthlyCost: -150
+  - name: Public Transport
+    debitCategory: 0
+    monthlyCost: -55
+  - name: Phone Contract
+    debitCategory: 6
+    monthlyCost: -30
+  - name: Shopping
+    debitCategory: 0
+    monthlyCost: -140
+  - name: Lottery
+    debitCategory: 4
+    monthlyCost: -12
+  - name: Charity Donations
+    debitCategory: 2
+    monthlyCost: -10
+  - name: Internet
+    debitCategory: 6
+    monthlyCost: -35
+  - name: Game Addons
+    debitCategory: 7
+    monthlyCost: -20
+  - name: Rent
+    debitCategory: 2
+    monthlyCost: -350
+  - name: Lighthome
+    debitCategory: 8
+    monthlyCost: -35
+  - name: TV & Landline Phone
+    debitCategory: 6
+    monthlyCost: -40
+  - name: Loan From Friend
+    debitCategory: 2
+    monthlyCost: -50
+  - name: Lunch In Work
+    debitCategory: 9
+    monthlyCost: 20
+  currentDebits: []
+  possibleIncome:
+  - name: Student Loan
+    monthlyAmount: 600
+  - name: Work
+    monthlyAmount: 450
+  - name: Overtime
+    monthlyAmount: 0
+  currentIncome: []
   currentEvents: []
   mandatoryEvents:
   - ID: 3
@@ -1278,7 +1339,7 @@ MonoBehaviour:
     image: 8
     description: You've been thinking about getting a new couch for your flat, but
       it would be far too expensive to buy all at once. You've been thinking about
-      getting one from Darkhome, where you can pay it up each week, but the interest
+      getting one from Lighthome, where you can pay it up each week, but the interest
       rates mean you'll end up paying much more overall. Will you do it?
     yesMoneyInstantEffect: 0
     yesMoneyMonthlyEffect: -20
@@ -1659,7 +1720,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 707138843}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -768.3029, z: 0}
+  m_LocalPosition: {x: 0, y: -767.51, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1970376990}
@@ -1696,7 +1757,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 769133968}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.000030517578, y: 229.63696, z: 0}
+  m_LocalPosition: {x: 0.000030517578, y: 229.3999, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1092866658}
@@ -1780,7 +1841,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 883773.7}
+  m_SizeDelta: {x: 0, y: 883774.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &800806629
 MonoBehaviour:
@@ -2002,7 +2063,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1092866657}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.1000366, y: -4.104248, z: 0}
+  m_LocalPosition: {x: 4.1000366, y: -4.1000366, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1256798566}
@@ -2076,7 +2137,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1106269152}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -330, y: -53.4027, z: 0}
+  m_LocalPosition: {x: -330, y: -53.347603, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2000826168}
@@ -2168,7 +2229,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1212660009}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -330, y: 53.375973, z: 0}
+  m_LocalPosition: {x: -330, y: 53.32091, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2000826168}
@@ -2259,7 +2320,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1256798565}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.000030517578, y: 616.6364, z: 0}
+  m_LocalPosition: {x: 0.000030517578, y: 616, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1092866658}
@@ -2333,7 +2394,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1302623540}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.000030517578, y: -0.000030517578, z: 0}
+  m_LocalPosition: {x: 0.000030517578, y: -0.000061035156, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1092866658}
@@ -2407,7 +2468,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1343967701}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 593.248, z: 0}
+  m_LocalPosition: {x: 0, y: 592.63574, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 194901878}
@@ -2450,7 +2511,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: <b>Decision x/20</b> | Month Day, Year
+  m_Text: <b>Decision x/30</b> | Month Day, Year
 --- !u!222 &1343967704
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2481,7 +2542,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1418685983}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 477.1596, z: 0}
+  m_LocalPosition: {x: 0, y: 476.66718, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 194901878}
@@ -2555,7 +2616,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1522259326}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.000030517578, y: -335.64493, z: 0}
+  m_LocalPosition: {x: 0.000030517578, y: -335.29855, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 194901878}
@@ -2703,7 +2764,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1549464442}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.000030517578, y: -229.63705, z: 0}
+  m_LocalPosition: {x: 0.000030517578, y: -229.40009, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1092866658}
@@ -2852,7 +2913,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1810596496}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 255, y: 0.02268219, z: 0}
+  m_LocalPosition: {x: 255, y: 0.022651672, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1563765998}
@@ -3093,7 +3154,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2000826167}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 760.77515, z: 0}
+  m_LocalPosition: {x: 0, y: 759.99005, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1212660010}
@@ -3135,7 +3196,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2089662988}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.000030517578, y: 53.38934, z: 0}
+  m_LocalPosition: {x: 0.000030517578, y: 53.334255, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2000826168}
@@ -3227,7 +3288,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2138518669}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.000030517578, y: -53.382656, z: 0}
+  m_LocalPosition: {x: 0.000030517578, y: -53.327583, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2000826168}

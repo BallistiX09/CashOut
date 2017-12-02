@@ -12,16 +12,24 @@ public class GameController : MonoBehaviour
     public static int currentMood = 0; //Mood based on int value from -100 to 100, with 0 being neutral
     public static int currentStudyHours = 0;
     public static int currentDay = 0;
+    public static string currentMonth = "";
     private bool soundsEnabled = true, musicEnabled = true;
     public static DateTime currentDate = System.DateTime.Now;
     public static RandomEvent currentEvent;
+
+    public static bool carOwned = false, tvLicenceCancelled = false, payingCreditCard = false, payingPaydayLoan = false, payingLighthome = false, phoneInsurance = false, 
+        betOnSports = false, playingLottery = false, buyingGameLater = false, loanFromFriend = false, internetCancelled = false;
+    public static int monthsLeftOnCC = 0, monthsLeftOnPDL = 0, monthsLeftOnFL = 0;
+
     private UIController UIController;
     private AudioSource buttonClickAudioSource;
     [SerializeField] private Animator animationController;
+
     [SerializeField] private List<Debit> possibleDebits = new List<Debit>();
     [SerializeField] private List<Debit> currentDebits = new List<Debit>();
     [SerializeField] private List<Income> possibleIncome = new List<Income>();
     [SerializeField] private List<Income> currentIncome = new List<Income>();
+
     [SerializeField] private List<RandomEvent> currentEvents = new List<RandomEvent>(); //Event pool for use in gameplay, uses a mixture of mandatory and random events
     [SerializeField] private List<RandomEvent> mandatoryEvents = new List<RandomEvent>(); //Events which will always happen with every playthrough
     [SerializeField] private List<RandomEvent> randomEvents = new List<RandomEvent>(); //Random events which may or may not be in a particular game
@@ -36,6 +44,7 @@ public class GameController : MonoBehaviour
         currentMood = 0;
         currentStudyHours = 0;
         currentDay = 0;
+        currentMonth = currentDate.ToString("MMMM");
 
         //Finds a reference to UI Controller and button click audio source
         UIController = FindObjectOfType<UIController>();
@@ -58,41 +67,13 @@ public class GameController : MonoBehaviour
         UIController.UpdateAllStatsText();
     }
 
-    private void BuildEventsList()
-    {
-        //Randomly removes 12 items from the random events list
-        //Will bring list down to 23 items, which combined with the 7 mandatory events will bring the list to 30
-        for(int i = 0; i < 22; i++)
-        {
-            randomEvents.RemoveAt(UnityEngine.Random.Range(0, randomEvents.Count));
-        }
-
-        //Copies the mandatory events into a temporary list
-        List<RandomEvent> tempEventsList = new List<RandomEvent>();
-
-        for (int i = 0; i < mandatoryEvents.Count; i++)
-        {
-            tempEventsList.Add(mandatoryEvents[i]);
-        }
-
-        //Copies the remaining random events into the temporary list
-        for (int i = 0; i < randomEvents.Count; i++)
-        {
-            tempEventsList.Add(randomEvents[i]);
-        }
-
-        //Creates new random number generator
-        System.Random rnd = new System.Random();
-
-        //Randomises the order of the temporary list with mandatory and random events combined, then copies the events into the current events list
-        currentEvents = tempEventsList.OrderBy(item => rnd.Next()).ToList();
-    }
-
     private void ButtonNoPressed()
     {
         if (animationController.GetCurrentAnimatorStateInfo(0).IsName("Cards Out Idle") || animationController.GetCurrentAnimatorStateInfo(0).IsName("Cards In Idle"))
         {
             PlayButtonClickSound();
+
+            CheckNoFollowUps();
 
             //Update stats text, using animations and setting the new value after animation is complete
             if (currentEvent.noMoneyInstantEffect != 0)
@@ -122,6 +103,8 @@ public class GameController : MonoBehaviour
         {
             PlayButtonClickSound();
 
+            CheckYesFollowUps();
+
             //Update stats text, using animations and setting the new value after animation is complete
             if (currentEvent.yesMoneyInstantEffect != 0)
             {
@@ -147,11 +130,9 @@ public class GameController : MonoBehaviour
     public void NextDay()
     {
         //30 interactive days total, with random non-interactive events mixed throughout and 5 trivia questions
-
         currentDay++;
 
-        //TODO Check if game finished here
-        if(currentDay == 20)
+        if(currentDay == 30)
         {
             UIController.EndGame();
         }
@@ -160,22 +141,295 @@ public class GameController : MonoBehaviour
 
         currentEvent = currentEvents[currentDay];
 
-        /*
-        //Ensures two identical events don't trigger in a row
-        //Currently unused due to new events system
-        lastEvent = currentEvent;
-        do
-        {
-            currentEvent = randomEvents[UnityEngine.Random.Range(0, randomEvents.Count)];
-        } while (currentEvent == lastEvent);*/
-
-        //TODO Maybe switch to delegates for day update
         UIController.UpdateDateText();
         UIController.UpdateEventInformation();
 
-        //TODO Update income and expenses each time new month entered on specific dates
+        if(currentMonth != currentDate.ToString("MMMM"))
+        {
+            currentMonth = currentDate.ToString("MMMM");
+            NewMonth();
+        }
 
         animationController.SetTrigger("CardsIn");
+    }
+
+    private void NewMonth()
+    {
+        int incomeExpensesDifference = 0;
+
+        foreach (Income income in currentIncome)
+        {
+            incomeExpensesDifference += income.monthlyAmount;
+        }
+
+        foreach (Debit debit in currentDebits)
+        {
+            incomeExpensesDifference += debit.monthlyCost;
+        }
+
+        if (payingCreditCard)
+        {
+            monthsLeftOnCC--;
+            if(monthsLeftOnCC <= 0)
+            {
+                payingCreditCard = false;
+                for (int i = 0; i < currentDebits.Count; i++)
+                {
+                    if (currentDebits[i].name == "Credit Card")
+                    {
+                        currentDebits.Remove(currentDebits[i]);
+                    }
+                }
+            }
+        }
+
+        if (payingPaydayLoan)
+        {
+            monthsLeftOnPDL--;
+            if(monthsLeftOnPDL <= 0)
+            {
+                payingPaydayLoan = false;
+                for (int i = 0; i < currentDebits.Count; i++)
+                {
+                    if (currentDebits[i].name == "Payday Loan")
+                    {
+                        currentDebits.Remove(currentDebits[i]);
+                    }
+                }
+            }
+        }
+
+        if (loanFromFriend)
+        {
+            monthsLeftOnFL--;
+            if(monthsLeftOnFL <= 0)
+            {
+                loanFromFriend = false;
+                for (int i = 0; i < currentDebits.Count; i++)
+                {
+                    if (currentDebits[i].name == "Loan From Friend")
+                    {
+                        currentDebits.Remove(currentDebits[i]);
+                    }
+                }
+            }
+        }
+
+        if (buyingGameLater)
+        {
+            incomeExpensesDifference -= 25;
+            buyingGameLater = false;
+        }
+
+        UIController.StopCoroutine("AnimateCashText");
+        UIController.StartCoroutine("AnimateCashText", currentCash + incomeExpensesDifference);
+    }
+
+    private void CheckNoFollowUps()
+    {
+        switch (currentEvent.ID)
+        {
+            case 28: //Switch to lower paying job
+                for (int i = 0; i < currentIncome.Count; i++)
+                {
+                    if (currentIncome[i].name == "Work")
+                    {
+                        currentIncome[i].monthlyAmount -= 50;
+                    }
+                }
+                break;
+        }
+    }
+
+    private void CheckYesFollowUps()
+    {
+        switch (currentEvent.ID)
+        {
+            case 3: //Car bought
+                carOwned = true;
+                currentDebits.Add(possibleDebits[0]);
+                for(int i = 0; i < currentDebits.Count; i++)
+                {
+                    if (currentDebits[i].name == "Public Transport")
+                    {
+                        currentDebits.Remove(currentDebits[i]);
+                    }
+                }
+                break;
+            case 4: //TV licence cancelled
+                tvLicenceCancelled = true;
+                for (int i = 0; i < currentDebits.Count; i++)
+                {
+                    if (currentDebits[i].name == "TV Licence")
+                    {
+                        currentDebits.Remove(currentDebits[i]);
+                    }
+                }
+                break;
+            case 5: //Paid with credit card
+                payingCreditCard = true;
+                monthsLeftOnCC = 4;
+                currentDebits.Add(possibleDebits[2]);
+                break;
+            case 6: //Overtime
+                currentIncome.Add(possibleIncome[2]);
+                break;
+            case 7: //Phone insurance
+                phoneInsurance = true;
+                currentDebits.Add(possibleDebits[3]);
+                break;
+            case 8: //Payday loan
+                payingPaydayLoan = true;
+                monthsLeftOnPDL = 3;
+                currentDebits.Add(possibleDebits[4]);
+                break;
+            case 9: //Sports bet
+                betOnSports = true;
+                break;
+            case 13: //Walking to uni
+                if (!carOwned)
+                {
+                    for (int i = 0; i < currentDebits.Count; i++)
+                    {
+                        if (currentDebits[i].name == "Public Transport")
+                        {
+                            currentDebits.Remove(currentDebits[i]);
+                        }
+                    }
+                }
+                break;
+            case 14: //Phone upgrade
+                for (int i = 0; i < currentDebits.Count; i++)
+                {
+                    if (currentDebits[i].name == "Phone Contract")
+                    {
+                        currentDebits[i].monthlyCost -= 15;
+                    }
+                }
+                break;
+            case 18: //Cheaper shopping
+                for (int i = 0; i < currentDebits.Count; i++)
+                {
+                    if (currentDebits[i].name == "Shopping")
+                    {
+                        currentDebits[i].monthlyCost += 60;
+                    }
+                }
+                break;
+            case 19: //Lottery
+                playingLottery = true;
+                currentDebits.Add(possibleDebits[8]);
+                break;
+            case 20: //Buying game later
+                buyingGameLater = true;
+                break;
+            case 27: //Charity
+                currentDebits.Add(possibleDebits[9]);
+                break;
+            case 28: //Change job
+                for (int i = 0; i < currentIncome.Count; i++)
+                {
+                    if (currentIncome[i].name == "Work")
+                    {
+                        currentIncome[i].monthlyAmount += 80;
+                    }
+                }
+                break;
+            case 29: //Cancel internet
+                internetCancelled = true;
+                for (int i = 0; i < currentDebits.Count; i++)
+                {
+                    if (currentDebits[i].name == "Internet")
+                    {
+                        currentDebits.Remove(currentDebits[i]);
+                    }
+                }
+                break;
+            case 31: //Game addons cancelled
+                for (int i = 0; i < currentDebits.Count; i++)
+                {
+                    if (currentDebits[i].name == "Game Addons")
+                    {
+                        currentDebits.Remove(currentDebits[i]);
+                    }
+                }
+                break;
+            case 35: //Upgrade student flat
+                for (int i = 0; i < currentDebits.Count; i++)
+                {
+                    if (currentDebits[i].name == "Rent")
+                    {
+                        currentDebits[i].monthlyCost -= 35;
+                    }
+                }
+                break;
+            case 36: //Friend loan
+                loanFromFriend = true;
+                monthsLeftOnFL = 2;
+                currentDebits.Add(possibleDebits[15]);
+                break;
+            case 37: //Shopping daily
+                for (int i = 0; i < currentDebits.Count; i++)
+                {
+                    if (currentDebits[i].name == "Shopping")
+                    {
+                        currentDebits[i].monthlyCost += 20;
+                    }
+                }
+                break;
+            case 38: //Lighthome
+                payingLighthome = true;
+                currentDebits.Add(possibleDebits[13]);
+                break;
+            case 40: //Bring lunch to work
+                for (int i = 0; i < currentDebits.Count; i++)
+                {
+                    if (currentDebits[i].name == "Lunch In Work")
+                    {
+                        currentDebits[i].monthlyCost += 20;
+                    }
+                }
+                break;
+            case 41: //Energy savings
+                for (int i = 0; i < currentDebits.Count; i++)
+                {
+                    if (currentDebits[i].name == "Rent")
+                    {
+                        currentDebits[i].monthlyCost += 15;
+                    }
+                }
+                break;
+            case 42: //Shop at night
+                for (int i = 0; i < currentDebits.Count; i++)
+                {
+                    if (currentDebits[i].name == "Shopping")
+                    {
+                        currentDebits[i].monthlyCost += 10;
+                    }
+                }
+                break;
+            case 43: //Upgrade internet
+                if (!internetCancelled)
+                {
+                    for (int i = 0; i < currentDebits.Count; i++)
+                    {
+                        if (currentDebits[i].name == "Internet")
+                        {
+                            currentDebits[i].monthlyCost -= 15;
+                        }
+                    }
+                }
+                break;
+            case 44: //Cancel TV and landline
+                for (int i = 0; i < currentDebits.Count; i++)
+                {
+                    if (currentDebits[i].name == "TV & Landline Phone")
+                    {
+                        currentDebits.Remove(currentDebits[i]);
+                    }
+                }
+                break;
+        }
     }
 
     private void SetUpStats()
@@ -203,6 +457,37 @@ public class GameController : MonoBehaviour
         currentDebits.Add(possibleDebits[11]); //Game addons
         currentDebits.Add(possibleDebits[12]); //Rent
         currentDebits.Add(possibleDebits[14]); //TV and landline
+        currentDebits.Add(possibleDebits[16]); //Lunch in work
+    }
+
+    private void BuildEventsList()
+    {
+        //Randomly removes 12 items from the random events list
+        //Will bring list down to 23 items, which combined with the 7 mandatory events will bring the list to 30
+        for (int i = 0; i < 12; i++)
+        {
+            randomEvents.RemoveAt(UnityEngine.Random.Range(0, randomEvents.Count));
+        }
+
+        //Copies the mandatory events into a temporary list
+        List<RandomEvent> tempEventsList = new List<RandomEvent>();
+
+        for (int i = 0; i < mandatoryEvents.Count; i++)
+        {
+            tempEventsList.Add(mandatoryEvents[i]);
+        }
+
+        //Copies the remaining random events into the temporary list
+        for (int i = 0; i < randomEvents.Count; i++)
+        {
+            tempEventsList.Add(randomEvents[i]);
+        }
+
+        //Creates new random number generator
+        System.Random rnd = new System.Random();
+
+        //Randomises the order of the temporary list with mandatory and random events combined, then copies the events into the current events list
+        currentEvents = tempEventsList.OrderBy(item => rnd.Next()).ToList();
     }
 
     private void PlayButtonClickSound()
