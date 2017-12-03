@@ -3,12 +3,12 @@
 public class RandomEvent
 {
     //Contains every image type for each matching event category
-    public enum imageType { TRANSPORT, ENTERTAINMENT, FINANCIAL, WORK, GAMBLING, SOCIAL, TECHNOLOGY, GAMING, SHOPPING, FOOD, EDUCATION };
+    public enum Category { TRANSPORT, ENTERTAINMENT, FINANCIAL, WORK, GAMBLING, SOCIAL, TECHNOLOGY, GAMING, SHOPPING, FOOD, EDUCATION };
 
     //Publicly accessible RandomEvent parameters
     public int ID;
     public string title;
-    public imageType image;
+    public Category category;
     public string description;
     public int yesMoneyInstantEffect;
     public int yesMoneyMonthlyEffect;

@@ -205,7 +205,7 @@ RectTransform:
   - {fileID: 292061863}
   - {fileID: 1092866658}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -979,10 +979,13 @@ MonoBehaviour:
     monthlyCost: -20
   possibleIncome:
   - name: Student Loan
+    incomeCategory: 0
     monthlyAmount: 550
   - name: Work
+    incomeCategory: 1
     monthlyAmount: 450
   - name: Overtime
+    incomeCategory: 2
     monthlyAmount: 0
   currentEvents: []
   mandatoryEvents:
@@ -2046,7 +2049,7 @@ GameObject:
   - component: {fileID: 897613080}
   - component: {fileID: 897613079}
   m_Layer: 0
-  m_Name: EventSystem
+  m_Name: Event System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2095,7 +2098,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &916415666
 GameObject:
@@ -2183,7 +2186,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1092866657
 GameObject:
@@ -2844,6 +2847,63 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1418685983}
+--- !u!1 &1425193570
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1425193572}
+  - component: {fileID: 1425193571}
+  m_Layer: 0
+  m_Name: Player Performance
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1425193571
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1425193570}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbcbd5cc341bcff46a210bd1e3d56fd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  earnedFromStudentLoan: 0
+  earnedFromWork: 0
+  earnedFromOvertime: 0
+  spentOnTransport: 0
+  spentOnEntertainment: 0
+  spentOnFinancial: 0
+  spentOnFood: 0
+  spentOnWork: 0
+  spentOnGambling: 0
+  spentOnShopping: 0
+  spentOnSocial: 0
+  spentOnTechnology: 0
+  spentOnGaming: 0
+  spentOnEducation: 0
+  spentOnLoans: 0
+  moodIncreaseActions: 0
+  moodDecreaseActions: 0
+--- !u!4 &1425193572
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1425193570}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 498.86676, y: 1010.83203, z: -0.67073786}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1522259326
 GameObject:
   m_ObjectHideFlags: 0

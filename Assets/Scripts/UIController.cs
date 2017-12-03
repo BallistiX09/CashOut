@@ -135,39 +135,39 @@ public class UIController : MonoBehaviour
         eventTitleText.text = GameController.currentEvent.title;
         eventDescriptionText.text = GameController.currentEvent.description;
         
-        switch (GameController.currentEvent.image)
+        switch (GameController.currentEvent.category)
         {
-            case RandomEvent.imageType.TRANSPORT:
+            case RandomEvent.Category.TRANSPORT:
                 eventImage.sprite = eventImageTypes[0];
                 break;
-            case RandomEvent.imageType.ENTERTAINMENT:
+            case RandomEvent.Category.ENTERTAINMENT:
                 eventImage.sprite = eventImageTypes[1];
                 break;
-            case RandomEvent.imageType.FINANCIAL:
+            case RandomEvent.Category.FINANCIAL:
                 eventImage.sprite = eventImageTypes[2];
                 break;
-            case RandomEvent.imageType.WORK:
+            case RandomEvent.Category.WORK:
                 eventImage.sprite = eventImageTypes[3];
                 break;
-            case RandomEvent.imageType.GAMBLING:
+            case RandomEvent.Category.GAMBLING:
                 eventImage.sprite = eventImageTypes[4];
                 break;
-            case RandomEvent.imageType.SOCIAL:
+            case RandomEvent.Category.SOCIAL:
                 eventImage.sprite = eventImageTypes[5];
                 break;
-            case RandomEvent.imageType.TECHNOLOGY:
+            case RandomEvent.Category.TECHNOLOGY:
                 eventImage.sprite = eventImageTypes[6];
                 break;
-            case RandomEvent.imageType.GAMING:
+            case RandomEvent.Category.GAMING:
                 eventImage.sprite = eventImageTypes[7];
                 break;
-            case RandomEvent.imageType.SHOPPING:
+            case RandomEvent.Category.SHOPPING:
                 eventImage.sprite = eventImageTypes[8];
                 break;
-            case RandomEvent.imageType.FOOD:
+            case RandomEvent.Category.FOOD:
                 eventImage.sprite = eventImageTypes[9];
                 break;
-            case RandomEvent.imageType.EDUCATION:
+            case RandomEvent.Category.EDUCATION:
                 eventImage.sprite = eventImageTypes[10];
                 break;
         }
