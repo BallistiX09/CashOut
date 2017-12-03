@@ -14,7 +14,8 @@ public class UIController : MonoBehaviour
     [SerializeField] private Text eventDescriptionText;
     [SerializeField] private Text leftChoiceButtonText, rightChoiceButtonText;
     [SerializeField] private Text endMoneyText, endMoodText, endStudyText;
-    [SerializeField] private GameObject gameOverPanel;
+    [SerializeField] private Text incomesText, debitsText;
+    [SerializeField] private GameObject gameOverPanel, debitsPanel;
     [SerializeField] private Animator statCashTitleAnim, statCashAmountAnim;
     [SerializeField] private Animator statMoodTitleAnim, statMoodAmountAnim;
     [SerializeField] private Animator statStudyTitleAnim, statStudyAmountAnim;
@@ -198,6 +199,21 @@ public class UIController : MonoBehaviour
         else
         {
             return "Neutral"; //Should not reach this point, only used if mood goes out of scale
+        }
+    }
+
+    public void ShowDebits()
+    {
+        debitsPanel.SetActive(true);
+        
+        foreach (Income income in GameController.currentIncome)
+        {
+            incomesText.text += income.name + ": +£" + income.monthlyAmount + "\n\n";
+        }
+
+        foreach (Debit debit in GameController.currentDebits)
+        {
+            debitsText.text += debit.name + ": -£" + debit.monthlyCost.ToString().Substring(1, debit.monthlyCost.ToString().Length-1) + "\n\n";
         }
     }
 

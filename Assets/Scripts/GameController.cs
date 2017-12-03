@@ -26,9 +26,9 @@ public class GameController : MonoBehaviour
     [SerializeField] private Animator animationController;
 
     [SerializeField] private List<Debit> possibleDebits = new List<Debit>();
-    [SerializeField] private List<Debit> currentDebits = new List<Debit>();
     [SerializeField] private List<Income> possibleIncome = new List<Income>();
-    [SerializeField] private List<Income> currentIncome = new List<Income>();
+    [SerializeField] public static List<Debit> currentDebits = new List<Debit>();
+    [SerializeField] public static List<Income> currentIncome = new List<Income>();
 
     [SerializeField] private List<RandomEvent> currentEvents = new List<RandomEvent>(); //Event pool for use in gameplay, uses a mixture of mandatory and random events
     [SerializeField] private List<RandomEvent> mandatoryEvents = new List<RandomEvent>(); //Events which will always happen with every playthrough
