@@ -83,41 +83,44 @@ public class GameController : MonoBehaviour
                 switch (currentEvent.category)
                 {
                     case RandomEvent.Category.EDUCATION:
-                        playerPerformance.spentOnEducation += currentEvent.noMoneyInstantEffect;
+                        playerPerformance.spentOnEducation += Math.Abs(currentEvent.noMoneyInstantEffect);
                         break;
                     case RandomEvent.Category.ENTERTAINMENT:
-                        playerPerformance.spentOnEntertainment += currentEvent.noMoneyInstantEffect;
+                        playerPerformance.spentOnEntertainment += Math.Abs(currentEvent.noMoneyInstantEffect);
                         break;
                     case RandomEvent.Category.FINANCIAL:
-                        playerPerformance.spentOnFinancial += currentEvent.noMoneyInstantEffect;
+                        playerPerformance.spentOnFinancial += Math.Abs(currentEvent.noMoneyInstantEffect);
                         break;
                     case RandomEvent.Category.FOOD:
-                        playerPerformance.spentOnFood += currentEvent.noMoneyInstantEffect;
+                        playerPerformance.spentOnFood += Math.Abs(currentEvent.noMoneyInstantEffect);
                         break;
                     case RandomEvent.Category.GAMBLING:
-                        playerPerformance.spentOnGambling += currentEvent.noMoneyInstantEffect;
+                        playerPerformance.spentOnGambling += Math.Abs(currentEvent.noMoneyInstantEffect);
                         break;
                     case RandomEvent.Category.GAMING:
-                        playerPerformance.spentOnGaming += currentEvent.noMoneyInstantEffect;
+                        playerPerformance.spentOnGaming += Math.Abs(currentEvent.noMoneyInstantEffect);
                         break;
                     case RandomEvent.Category.SHOPPING:
-                        playerPerformance.spentOnShopping += currentEvent.noMoneyInstantEffect;
+                        playerPerformance.spentOnShopping += Math.Abs(currentEvent.noMoneyInstantEffect);
                         break;
                     case RandomEvent.Category.SOCIAL:
-                        playerPerformance.spentOnSocial += currentEvent.noMoneyInstantEffect;
+                        playerPerformance.spentOnSocial += Math.Abs(currentEvent.noMoneyInstantEffect);
                         break;
                     case RandomEvent.Category.TECHNOLOGY:
-                        playerPerformance.spentOnTechnology += currentEvent.noMoneyInstantEffect;
+                        playerPerformance.spentOnTechnology += Math.Abs(currentEvent.noMoneyInstantEffect);
                         break;
                     case RandomEvent.Category.TRANSPORT:
-                        playerPerformance.spentOnTransport += currentEvent.noMoneyInstantEffect;
+                        playerPerformance.spentOnTransport += Math.Abs(currentEvent.noMoneyInstantEffect);
                         break;
                     case RandomEvent.Category.WORK:
-                        playerPerformance.spentOnWork += currentEvent.noMoneyInstantEffect;
+                        playerPerformance.spentOnWork += Math.Abs(currentEvent.noMoneyInstantEffect);
+                        break;
+                    case RandomEvent.Category.RENT:
+                        playerPerformance.spentOnRent += Math.Abs(currentEvent.noMoneyInstantEffect);
                         break;
                     default:
                         Debug.LogWarning("Category not found");
-                        playerPerformance.spentOnFinancial += currentEvent.noMoneyInstantEffect;
+                        playerPerformance.spentOnFinancial += Math.Abs(currentEvent.noMoneyInstantEffect);
                         break;
                 }
 
@@ -163,41 +166,44 @@ public class GameController : MonoBehaviour
                 switch (currentEvent.category)
                 {
                     case RandomEvent.Category.EDUCATION:
-                        playerPerformance.spentOnEducation += currentEvent.yesMoneyInstantEffect;
+                        playerPerformance.spentOnEducation += Math.Abs(currentEvent.yesMoneyInstantEffect);
                         break;
                     case RandomEvent.Category.ENTERTAINMENT:
-                        playerPerformance.spentOnEntertainment += currentEvent.yesMoneyInstantEffect;
+                        playerPerformance.spentOnEntertainment += Math.Abs(currentEvent.yesMoneyInstantEffect);
                         break;
                     case RandomEvent.Category.FINANCIAL:
-                        playerPerformance.spentOnFinancial += currentEvent.yesMoneyInstantEffect;
+                        playerPerformance.spentOnFinancial += Math.Abs(currentEvent.yesMoneyInstantEffect);
                         break;
                     case RandomEvent.Category.FOOD:
-                        playerPerformance.spentOnFood += currentEvent.yesMoneyInstantEffect;
+                        playerPerformance.spentOnFood += Math.Abs(currentEvent.yesMoneyInstantEffect);
                         break;
                     case RandomEvent.Category.GAMBLING:
-                        playerPerformance.spentOnGambling += currentEvent.yesMoneyInstantEffect;
+                        playerPerformance.spentOnGambling += Math.Abs(currentEvent.yesMoneyInstantEffect);
                         break;
                     case RandomEvent.Category.GAMING:
-                        playerPerformance.spentOnGaming += currentEvent.yesMoneyInstantEffect;
+                        playerPerformance.spentOnGaming += Math.Abs(currentEvent.yesMoneyInstantEffect);
                         break;
                     case RandomEvent.Category.SHOPPING:
-                        playerPerformance.spentOnShopping += currentEvent.yesMoneyInstantEffect;
+                        playerPerformance.spentOnShopping += Math.Abs(currentEvent.yesMoneyInstantEffect);
                         break;
                     case RandomEvent.Category.SOCIAL:
-                        playerPerformance.spentOnSocial += currentEvent.yesMoneyInstantEffect;
+                        playerPerformance.spentOnSocial += Math.Abs(currentEvent.yesMoneyInstantEffect);
                         break;
                     case RandomEvent.Category.TECHNOLOGY:
-                        playerPerformance.spentOnTechnology += currentEvent.yesMoneyInstantEffect;
+                        playerPerformance.spentOnTechnology += Math.Abs(currentEvent.yesMoneyInstantEffect);
                         break;
                     case RandomEvent.Category.TRANSPORT:
-                        playerPerformance.spentOnTransport += currentEvent.yesMoneyInstantEffect;
+                        playerPerformance.spentOnTransport += Math.Abs(currentEvent.yesMoneyInstantEffect);
                         break;
                     case RandomEvent.Category.WORK:
-                        playerPerformance.spentOnWork += currentEvent.yesMoneyInstantEffect;
+                        playerPerformance.spentOnWork += Math.Abs(currentEvent.yesMoneyInstantEffect);
+                        break;
+                    case RandomEvent.Category.RENT:
+                        playerPerformance.spentOnRent += Math.Abs(currentEvent.yesMoneyInstantEffect);
                         break;
                     default:
                         Debug.LogWarning("Category not found");
-                        playerPerformance.spentOnFinancial += currentEvent.yesMoneyInstantEffect;
+                        playerPerformance.spentOnFinancial += Math.Abs(currentEvent.yesMoneyInstantEffect);
                         break;
                 }
 
@@ -246,7 +252,7 @@ public class GameController : MonoBehaviour
             playerPerformance.daysSpentInOverdraft += daysToIncrementBy;
         }
 
-        if(currentMood < 0)
+        if(currentMood <= -40)
         {
             playerPerformance.daysSpentUnhappy += daysToIncrementBy;
         }
@@ -304,41 +310,44 @@ public class GameController : MonoBehaviour
             switch (debit.debitCategory)
             {
                 case Debit.Category.EDUCATION:
-                    playerPerformance.spentOnEducation += debit.monthlyCost;
+                    playerPerformance.spentOnEducation += Math.Abs(debit.monthlyCost);
                     break;
                 case Debit.Category.ENTERTAINMENT:
-                    playerPerformance.spentOnEntertainment += debit.monthlyCost;
+                    playerPerformance.spentOnEntertainment += Math.Abs(debit.monthlyCost);
                     break;
                 case Debit.Category.FINANCIAL:
-                    playerPerformance.spentOnFinancial += debit.monthlyCost;
+                    playerPerformance.spentOnFinancial += Math.Abs(debit.monthlyCost);
                     break;
                 case Debit.Category.FOOD:
-                    playerPerformance.spentOnFood += debit.monthlyCost;
+                    playerPerformance.spentOnFood += Math.Abs(debit.monthlyCost);
                     break;
                 case Debit.Category.GAMBLING:
-                    playerPerformance.spentOnGambling += debit.monthlyCost;
+                    playerPerformance.spentOnGambling += Math.Abs(debit.monthlyCost);
                     break;
                 case Debit.Category.GAMING:
-                    playerPerformance.spentOnGaming += debit.monthlyCost;
+                    playerPerformance.spentOnGaming += Math.Abs(debit.monthlyCost);
                     break;
                 case Debit.Category.SHOPPING:
-                    playerPerformance.spentOnShopping += debit.monthlyCost;
+                    playerPerformance.spentOnShopping += Math.Abs(debit.monthlyCost);
                     break;
                 case Debit.Category.SOCIAL:
-                    playerPerformance.spentOnSocial += debit.monthlyCost;
+                    playerPerformance.spentOnSocial += Math.Abs(debit.monthlyCost);
                     break;
                 case Debit.Category.TECHNOLOGY:
-                    playerPerformance.spentOnTechnology += debit.monthlyCost;
+                    playerPerformance.spentOnTechnology += Math.Abs(debit.monthlyCost);
                     break;
                 case Debit.Category.TRANSPORT:
-                    playerPerformance.spentOnTransport += debit.monthlyCost;
+                    playerPerformance.spentOnTransport += Math.Abs(debit.monthlyCost);
                     break;
                 case Debit.Category.WORK:
-                    playerPerformance.spentOnWork += debit.monthlyCost;
+                    playerPerformance.spentOnWork += Math.Abs(debit.monthlyCost);
+                    break;
+                case Debit.Category.RENT:
+                    playerPerformance.spentOnRent += Math.Abs(debit.monthlyCost);
                     break;
                 default:
                     Debug.LogWarning("Category not found");
-                    playerPerformance.spentOnFinancial += debit.monthlyCost;
+                    playerPerformance.spentOnFinancial += Math.Abs(debit.monthlyCost);
                     break;
             }
         }

@@ -3,7 +3,7 @@
 public class RandomEvent
 {
     //Contains every image type for each matching event category
-    public enum Category { TRANSPORT, ENTERTAINMENT, FINANCIAL, WORK, GAMBLING, SOCIAL, TECHNOLOGY, GAMING, SHOPPING, FOOD, EDUCATION };
+    public enum Category { TRANSPORT, ENTERTAINMENT, FINANCIAL, WORK, GAMBLING, SOCIAL, TECHNOLOGY, GAMING, SHOPPING, FOOD, EDUCATION, RENT };
 
     //Publicly accessible RandomEvent parameters
     public int ID;

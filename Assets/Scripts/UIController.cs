@@ -170,6 +170,12 @@ public class UIController : MonoBehaviour
             case RandomEvent.Category.EDUCATION:
                 eventImage.sprite = eventImageTypes[10];
                 break;
+            case RandomEvent.Category.RENT:
+                eventImage.sprite = eventImageTypes[11];
+                break;
+            default:
+                eventImage.sprite = eventImageTypes[2];
+                break;
         }
     }
 

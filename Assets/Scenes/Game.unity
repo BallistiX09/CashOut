@@ -963,7 +963,7 @@ MonoBehaviour:
     debitCategory: 7
     monthlyCost: -20
   - name: Rent
-    debitCategory: 2
+    debitCategory: 11
     monthlyCost: -350
   - name: Lighthome
     debitCategory: 8
@@ -991,7 +991,7 @@ MonoBehaviour:
   mandatoryEvents:
   - ID: 3
     title: Get A Car
-    image: 0
+    category: 0
     description: "You see a cheap car for sale. It would cost you \xA3400 up front,
       and then the extra costs each month, but it would be much more convenient than
       getting a bus or walking, and you would have extra studying time. Will you get
@@ -1006,7 +1006,7 @@ MonoBehaviour:
     noStudyEffect: 0
   - ID: 4
     title: TV Licence
-    image: 1
+    category: 1
     description: "You regularly watch TV, but realise that you could say you don't
       and save \xA312 per month on your TV licence. The fines can be quite big if
       caught lying though. Will you stop paying the licence?"
@@ -1020,7 +1020,7 @@ MonoBehaviour:
     noStudyEffect: 0
   - ID: 5
     title: Credit Card
-    image: 2
+    category: 2
     description: "You need to buy a new \xA3400 laptop for university. You could buy
       it on your credit card, but the interest rates are high. You'd much prefer paying
       for it up front, but it's a lot of money to spend at once. Will you buy it using
@@ -1035,7 +1035,7 @@ MonoBehaviour:
     noStudyEffect: 0
   - ID: 6
     title: Overtime
-    image: 3
+    category: 3
     description: "You've been offered the chance to do overtime in work each month.
       It'll be an extra \xA3120 each month, but it'll eat into your study hours. Will
       you do it?"
@@ -1049,7 +1049,7 @@ MonoBehaviour:
     noStudyEffect: 0
   - ID: 7
     title: Phone Insurance
-    image: 2
+    category: 2
     description: "You've seen an advert for an insurance company who can cover your
       phone for \xA310 a month. It'll cost extra each month, but would be handy if
       you ever break or lose it. Will you get the cover?"
@@ -1063,7 +1063,7 @@ MonoBehaviour:
     noStudyEffect: 0
   - ID: 8
     title: Payday Loan
-    image: 2
+    category: 2
     description: "You've had an email from a payday loan company offering a loan of
       \xA3300 over 3 months. It would be great for a quick money boost to buy things
       you need, but the interest rate is 292%. Will you do it?"
@@ -1077,7 +1077,7 @@ MonoBehaviour:
     noStudyEffect: 0
   - ID: 9
     title: Sports Bet
-    image: 4
+    category: 4
     description: "There's a game on which you're thinking about placing a bet on.
       It'll cost you \xA320, but if it pays out, you could win hundreds. Will you
       place the bet?"
@@ -1092,7 +1092,7 @@ MonoBehaviour:
   randomEvents:
   - ID: 11
     title: Night Out
-    image: 5
+    category: 5
     description: You've been invited on a night out with a few friends. It'll be expensive,
       but it would be a great night. Will you go?
     yesMoneyInstantEffect: -50
@@ -1105,7 +1105,7 @@ MonoBehaviour:
     noStudyEffect: 0
   - ID: 12
     title: Concert
-    image: 1
+    category: 1
     description: "Your favourite band just announced a tour and you're dying to get
       a ticket, but it's going to be \xA360 just for the ticket. You could always
       see them next time, but that might mean waiting years. Will you go?"
@@ -1119,7 +1119,7 @@ MonoBehaviour:
     noStudyEffect: 0
   - ID: 13
     title: Walk To University
-    image: 0
+    category: 0
     description: You've been paying for public transport to get to university, but
       you live close enough that walking would be an option. It would take longer
       and eat into your study time, but would save a lot of money each month. Will
@@ -1134,7 +1134,7 @@ MonoBehaviour:
     noStudyEffect: 0
   - ID: 14
     title: Phone Upgrade
-    image: 6
+    category: 6
     description: "Your mobile network has called you and offered you an upgrade deal
       on the latest iSung phone. Your current phone works fine and the upgrade would
       \xA375 upfront then an extra \xA315 a month. Will you do the upgrade?"
@@ -1148,7 +1148,7 @@ MonoBehaviour:
     noStudyEffect: 0
   - ID: 15
     title: New Console
-    image: 7
+    category: 7
     description: "A new next-gen games console has just been released for \xA3250.
       You know most of your friends will be getting one and would love to get one,
       but it's a lot of money to spend. Will you get one?"
@@ -1162,7 +1162,7 @@ MonoBehaviour:
     noStudyEffect: 1
   - ID: 16
     title: New Clothes
-    image: 8
+    category: 8
     description: You've had the same clothes for a while now and although your current
       ones are fine, you feel like you could do with a change. It'll cost quite a
       bit of money for everything you want to buy. Will you do it?
@@ -1176,7 +1176,7 @@ MonoBehaviour:
     noStudyEffect: 0
   - ID: 17
     title: Order In
-    image: 9
+    category: 9
     description: You're bored of the usual food you make and can't be bothered with
       cooking today. You could order food in, but it would be a bit of a waste of
       money. Will you do it?
@@ -1190,7 +1190,7 @@ MonoBehaviour:
     noStudyEffect: 0
   - ID: 18
     title: Cheaper Shopping
-    image: 8
+    category: 8
     description: You and your flatmates normally take turns in buying the shopping.
       Your flatmates usually buy brand-name shopping, but you could go for the cheaper
       brands instead in the future. Your flatmates might get annoyed at you for not
@@ -1205,7 +1205,7 @@ MonoBehaviour:
     noStudyEffect: 0
   - ID: 19
     title: Lottery Ticket
-    image: 4
+    category: 4
     description: "You've been thinking about trying the lottery out for a while. You're
       thinking of spending \xA33 per week on the lottery. It could be a complete waste
       of money, but there's always the chance that you might win. Will you do it?"
@@ -1219,7 +1219,7 @@ MonoBehaviour:
     noStudyEffect: 0
   - ID: 20
     title: New Game
-    image: 7
+    category: 7
     description: "A new game has just been released which you've been following for
       months. It's \xA345 just now, but you know it will probably drop in price over
       the next month or so. Will you get it now, or will you hold off till next month?"
@@ -1233,7 +1233,7 @@ MonoBehaviour:
     noStudyEffect: 0
   - ID: 21
     title: Cinema
-    image: 1
+    category: 1
     description: A few friends are going to the cinema and you've been invited to
       come along. It'll cost a little for the ticket, food, and drink, but would give
       you something different to do. Will you go?
@@ -1247,7 +1247,7 @@ MonoBehaviour:
     noStudyEffect: 0
   - ID: 22
     title: Course Software
-    image: 10
+    category: 10
     description: "Your lecturer has reccomended a program which would be very useful
       on your course, but the university doesn't provide it for free. The company
       offers a student discount, bringing the cost down to \xA350. Will you buy it?"
@@ -1261,7 +1261,7 @@ MonoBehaviour:
     noStudyEffect: 0
   - ID: 23
     title: Weekend Holiday
-    image: 5
+    category: 5
     description: "You've been invited away on a weekend away with a few friends. You're
       not going far, but it will still cost over \xA3200 to go. Will you go with them?"
     yesMoneyInstantEffect: -220
@@ -1274,7 +1274,7 @@ MonoBehaviour:
     noStudyEffect: 0
   - ID: 24
     title: Friend Reunion
-    image: 5
+    category: 5
     description: A couple of friends from school have got in touch and are planning
       to meet up for a day. You'll need to travel a bit to get there, but it would
       be nice to go. Will you go to see them?
@@ -1288,7 +1288,7 @@ MonoBehaviour:
     noStudyEffect: 0
   - ID: 25
     title: Music Festival
-    image: 1
+    category: 1
     description: "Tickets have just been released for a music festival you go to every
       year. The friends you normally go with all have their tickets already and there's
       a chance tickets will sell out if you wait, but tickets and spending money will
@@ -1303,7 +1303,7 @@ MonoBehaviour:
     noStudyEffect: 0
   - ID: 26
     title: Laptop Upgrade
-    image: 10
+    category: 6
     description: "Your current laptop is quite low-end, and you've seen a much more
       powerful one on sale which you would love to get. This would be much nicer to
       use than your current one, and would help with your coursework as well. If you
@@ -1319,7 +1319,7 @@ MonoBehaviour:
     noStudyEffect: 0
   - ID: 27
     title: Charity Donations
-    image: 2
+    category: 2
     description: A charity worker came up to you in the street and spoke to you about
       donating to their charity each month. You would love to help out, but it means
       spending more money each month. Will you do it?
@@ -1333,7 +1333,7 @@ MonoBehaviour:
     noStudyEffect: 0
   - ID: 28
     title: Change Job
-    image: 3
+    category: 3
     description: You've been thinking about changing jobs for a while. There's two
       you have your eye on currently. You were planning on going for a job you've
       always liked the sound of, but it doesn't pay very well. A position at a local
@@ -1349,7 +1349,7 @@ MonoBehaviour:
     noStudyEffect: 0
   - ID: 29
     title: Cancel Broadband
-    image: 6
+    category: 6
     description: You've been thinking of various ways to save money, and realised
       you could start using your phone's hotspot feature to connect your laptop and
       everything else to the internet. This would allow you to cancel your broadband
@@ -1366,7 +1366,7 @@ MonoBehaviour:
     noStudyEffect: 0
   - ID: 30
     title: Buy Instrument
-    image: 1
+    category: 1
     description: "You've been thinking about learning an instrument as something new
       to do in your free time. It would be a handy skill to learn and would be fun
       as well, but would cost over \xA3100 for the instrument you're thinking about
@@ -1381,7 +1381,7 @@ MonoBehaviour:
     noStudyEffect: 0
   - ID: 31
     title: Game Addons
-    image: 7
+    category: 7
     description: "A few games you play include microtransactions and other DLC bundles.
       You tend to spend around \xA320 per month on these just now and they're keeping
       you playing, but you could do with saving a bit more money. Will you stop buying
@@ -1396,7 +1396,7 @@ MonoBehaviour:
     noStudyEffect: 0
   - ID: 32
     title: Time Off Work
-    image: 3
+    category: 3
     description: There's a project deadline coming up soon and you could do with with
       a bit of extra time to work on it. You can take a week off work, but it would
       be unpaid time off. Will you take the week off?
@@ -1410,7 +1410,7 @@ MonoBehaviour:
     noStudyEffect: 0
   - ID: 33
     title: Work Holiday
-    image: 3
+    category: 3
     description: You've got some well-earned holiday time booked off work soon. You
       could use it to relax and enjoy yourself, but could also use it to catch up
       on coursework instead. Will you use this time to study?
@@ -1424,7 +1424,7 @@ MonoBehaviour:
     noStudyEffect: 0
   - ID: 34
     title: University Event
-    image: 10
+    category: 10
     description: The university has an event coming up which would be relevant to
       your course and would help your studies, but will cost money to travel to and
       will need more spending money while there as well. Will you go?
@@ -1438,7 +1438,7 @@ MonoBehaviour:
     noStudyEffect: 0
   - ID: 35
     title: Student Flat
-    image: 2
+    category: 11
     description: "You're staying in one of the lower-end student flats just now, but
       a space has opened up in one of the newer builds. Your room would be larger
       and you'd have your own private bathroom, but the rent would go up by \xA335
@@ -1453,7 +1453,7 @@ MonoBehaviour:
     noStudyEffect: 0
   - ID: 36
     title: Ask For Loan
-    image: 2
+    category: 2
     description: "You're needing a little extra money and were thinking about asking
       a friend for a loan of \xA3100. There wouldn't be any interest, but you're worried
       they might get annoyed if you ask. Will you do it?"
@@ -1467,7 +1467,7 @@ MonoBehaviour:
     noStudyEffect: 0
   - ID: 37
     title: Daily Shopping
-    image: 8
+    category: 8
     description: You normally do your shopping every week or month, depending on how
       much needs bought in. Doing small shopping trips each day would save money because
       you would only be buing what you need, but it also takes longer to go on multiple
@@ -1482,7 +1482,7 @@ MonoBehaviour:
     noStudyEffect: 0
   - ID: 38
     title: Pay-Up Purchase
-    image: 8
+    category: 8
     description: You've been thinking about getting a new couch for your flat, but
       it would be far too expensive to buy all at once. You've been thinking about
       getting one from Lighthome, where you can pay it up each week, but the interest
@@ -1497,7 +1497,7 @@ MonoBehaviour:
     noStudyEffect: 0
   - ID: 39
     title: Drug Trial
-    image: 2
+    category: 2
     description: "A company is looking for people to take part in the first human
       tests of a new drug. They're paying \xA3120 to each person who signs up. The
       money would be nice, and you know there won't be much real danger, but it could
@@ -1512,7 +1512,7 @@ MonoBehaviour:
     noStudyEffect: 0
   - ID: 40
     title: Bring Lunch
-    image: 9
+    category: 9
     description: The food at your work's canteen is great, but it's not cheap, and
       buying lunch there adds up over the month. You could bring your own lunch instead,
       which would save money, but probably wouldn't be as good. Will you bring your
@@ -1527,7 +1527,7 @@ MonoBehaviour:
     noStudyEffect: 0
   - ID: 41
     title: Energy Saving
-    image: 2
+    category: 11
     description: After looking up some tips on saving energy, you've found out that
       you can save a little money each month by not leaving electronics on standby
       and turning down your heating. The savings wouldn't be massive and it will be
@@ -1542,7 +1542,7 @@ MonoBehaviour:
     noStudyEffect: 0
   - ID: 42
     title: Late Night Shopping
-    image: 8
+    category: 8
     description: Many supermarkets have reduced clearence stock at the end of the
       night to try to sell it before it needs to be binned. You could save money by
       shopping at night instead of during the day, but it would be more inconvenient
@@ -1557,7 +1557,7 @@ MonoBehaviour:
     noStudyEffect: 0
   - ID: 43
     title: Upgrade Internet
-    image: 6
+    category: 6
     description: "Your internet provider has just let you know that you can get their
       higher-speed package in your area, but it would cost \xA315 more per month.
       Your internet works fine just now, but faster speeds would always be an improvement.
@@ -1572,7 +1572,7 @@ MonoBehaviour:
     noStudyEffect: 0
   - ID: 44
     title: Cancel TV & Phone
-    image: 6
+    category: 6
     description: Because you can watch TV through online streaming services, and have
       a mobile phone for phone calls, you've not been using your home phone and TV
       as much lately. They're useful to have, and might mean that you miss out on
@@ -1588,7 +1588,7 @@ MonoBehaviour:
     noStudyEffect: 0
   - ID: 45
     title: Dentist
-    image: 2
+    category: 2
     description: "You've had a sore tooth for a few days now and should probably go
       to the dentist to get this checked out, but if any work needs done it'll cost
       at least \xA330. Will you go and get it checked out?"
@@ -1603,7 +1603,7 @@ MonoBehaviour:
   uncontrolledEvents:
   - ID: 47
     title: Washing Machine
-    image: 1
+    category: 0
     description: "Your washing machine has broken down and flooded the kitchen. It's
       going to cost \xA3150 to get it repaired."
     moneyInstantEffect: -150
@@ -1612,7 +1612,7 @@ MonoBehaviour:
     studyEffect: 0
   - ID: 48
     title: Broken Phone
-    image: 1
+    category: 0
     description: "You dropped your phone and smashed the screen. You don't have any
       insurance, and it'll cost \xA3150 to have the screen repaired."
     moneyInstantEffect: -150
@@ -1621,7 +1621,7 @@ MonoBehaviour:
     studyEffect: 0
   - ID: 49
     title: Project Extension
-    image: 0
+    category: 0
     description: Your lecturer has let you know that he is granting the entire class
       an extension on their project. You now have an extra weeek to work on it.
     moneyInstantEffect: 0
@@ -1630,7 +1630,7 @@ MonoBehaviour:
     studyEffect: 8
   - ID: 50
     title: Public Holiday
-    image: 0
+    category: 0
     description: Today is a public holiday, so you have the day off university and
       work. Enjoy!
     moneyInstantEffect: 0
@@ -1639,7 +1639,7 @@ MonoBehaviour:
     studyEffect: 4
   - ID: 51
     title: Car Crash
-    image: 1
+    category: 0
     description: You've been in a car crash. You're fine, but the car was badly damaged
       and you'll need to pay to get it repaired.
     moneyInstantEffect: -300
@@ -1648,7 +1648,7 @@ MonoBehaviour:
     studyEffect: 0
   - ID: 52
     title: Pre-Order Cancelled
-    image: 1
+    category: 0
     description: A pre-order for a game you were getting has been cancelled by the
       store, and it's now sold out everywhere. You'll need to wait a bit longer to
       get your hands on a copy.
@@ -1658,7 +1658,7 @@ MonoBehaviour:
     studyEffect: 0
   - ID: 53
     title: Data Corruption
-    image: 1
+    category: 0
     description: You've logged into your computer to find the report you were working
       on yesterday is corrupted. You never had any backups, so you'll need to start
       the report again.
@@ -1668,7 +1668,7 @@ MonoBehaviour:
     studyEffect: -3
   - ID: 54
     title: Positive Feedback
-    image: 0
+    category: 0
     description: You've had your results back from one of your coursework submissions,
       and your lecturer has said it's great!
     moneyInstantEffect: 0
@@ -1677,7 +1677,7 @@ MonoBehaviour:
     studyEffect: 2
   - ID: 55
     title: Negative Feedback
-    image: 1
+    category: 0
     description: You've had your results back from one of your coursework submissions,
       and your lecturer has said it's not up to scratch. You'll need to re-work some
       of the project.
@@ -1687,7 +1687,7 @@ MonoBehaviour:
     studyEffect: -2
   - ID: 56
     title: Won Competition
-    image: 0
+    category: 0
     description: "You won a competition you entered online and won \xA3100. Well done!"
     moneyInstantEffect: 100
     moneyMonthlyEffect: 0
@@ -1831,6 +1831,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 37b747a6168ab284ea93d685f1debd7e, type: 3}
   - {fileID: 21300000, guid: aaf456100a0b1bb44b091e813797c385, type: 3}
   - {fileID: 21300000, guid: 3bbbafd9dc245e445b5c2f690e8ba13d, type: 3}
+  - {fileID: 21300000, guid: b1ca51249a0abea40bafebf53366fc87, type: 3}
   eventDescriptionText: {fileID: 1522259328}
   leftChoiceButtonText: {fileID: 297007619}
   rightChoiceButtonText: {fileID: 1563765999}
@@ -2888,9 +2889,12 @@ MonoBehaviour:
   spentOnTechnology: 0
   spentOnGaming: 0
   spentOnEducation: 0
-  spentOnLoans: 0
+  spentOnRent: 0
   moodIncreaseActions: 0
   moodDecreaseActions: 0
+  daysSpentInOverdraft: 0
+  daysSpentUnhappy: 0
+  daysSpentUnder30StudyHours: 0
 --- !u!4 &1425193572
 Transform:
   m_ObjectHideFlags: 0
