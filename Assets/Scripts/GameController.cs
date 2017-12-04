@@ -62,7 +62,7 @@ public class GameController : MonoBehaviour
         BuildEventsList();
 
         //Select a random event from the list of events
-        currentEvent = currentEvents[UnityEngine.Random.Range(0, currentEvents.Count)];
+        currentEvent = currentEvents[0];
 
         //Update game UI with startup information
         UIController.UpdateDateText();
