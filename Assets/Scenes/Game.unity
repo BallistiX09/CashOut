@@ -550,7 +550,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 00000
+  m_Text: 
 --- !u!222 &246841054
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1280,6 +1280,8 @@ MonoBehaviour:
   - name: Overtime
     incomeCategory: 2
     monthlyAmount: 0
+  currentDebits: []
+  currentIncome: []
   currentEvents: []
   mandatoryEvents:
   - ID: 3
@@ -1896,20 +1898,18 @@ MonoBehaviour:
   uncontrolledEvents:
   - ID: 47
     title: Washing Machine
-    category: 0
+    category: 1
     description: "Your washing machine has broken down and flooded the kitchen. It's
       going to cost \xA3150 to get it repaired."
     moneyInstantEffect: -150
-    moneyMonthlyEffect: 0
     moodEffect: -35
     studyEffect: 0
   - ID: 48
     title: Broken Phone
-    category: 0
+    category: 1
     description: "You dropped your phone and smashed the screen. You don't have any
       insurance, and it'll cost \xA3150 to have the screen repaired."
     moneyInstantEffect: -150
-    moneyMonthlyEffect: 0
     moodEffect: -45
     studyEffect: 0
   - ID: 49
@@ -1918,7 +1918,6 @@ MonoBehaviour:
     description: Your lecturer has let you know that he is granting the entire class
       an extension on their project. You now have an extra weeek to work on it.
     moneyInstantEffect: 0
-    moneyMonthlyEffect: 0
     moodEffect: 30
     studyEffect: 8
   - ID: 50
@@ -1927,36 +1926,32 @@ MonoBehaviour:
     description: Today is a public holiday, so you have the day off university and
       work. Enjoy!
     moneyInstantEffect: 0
-    moneyMonthlyEffect: 0
     moodEffect: 25
     studyEffect: 4
   - ID: 51
     title: Car Crash
-    category: 0
+    category: 1
     description: You've been in a car crash. You're fine, but the car was badly damaged
       and you'll need to pay to get it repaired.
     moneyInstantEffect: -300
-    moneyMonthlyEffect: 0
     moodEffect: -75
     studyEffect: 0
   - ID: 52
     title: Pre-Order Cancelled
-    category: 0
+    category: 1
     description: A pre-order for a game you were getting has been cancelled by the
       store, and it's now sold out everywhere. You'll need to wait a bit longer to
       get your hands on a copy.
     moneyInstantEffect: 10
-    moneyMonthlyEffect: 0
     moodEffect: -20
     studyEffect: 0
   - ID: 53
     title: Data Corruption
-    category: 0
+    category: 1
     description: You've logged into your computer to find the report you were working
       on yesterday is corrupted. You never had any backups, so you'll need to start
       the report again.
     moneyInstantEffect: 0
-    moneyMonthlyEffect: 0
     moodEffect: -40
     studyEffect: -3
   - ID: 54
@@ -1965,17 +1960,15 @@ MonoBehaviour:
     description: You've had your results back from one of your coursework submissions,
       and your lecturer has said it's great!
     moneyInstantEffect: 0
-    moneyMonthlyEffect: 0
     moodEffect: 40
     studyEffect: 2
   - ID: 55
     title: Negative Feedback
-    category: 0
+    category: 1
     description: You've had your results back from one of your coursework submissions,
       and your lecturer has said it's not up to scratch. You'll need to re-work some
       of the project.
     moneyInstantEffect: 0
-    moneyMonthlyEffect: 0
     moodEffect: -40
     studyEffect: -2
   - ID: 56
@@ -1983,7 +1976,6 @@ MonoBehaviour:
     category: 0
     description: "You won a competition you entered online and won \xA3100. Well done!"
     moneyInstantEffect: 100
-    moneyMonthlyEffect: 0
     moodEffect: 30
     studyEffect: 0
 --- !u!82 &554677219
@@ -2364,6 +2356,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: aaf456100a0b1bb44b091e813797c385, type: 3}
   - {fileID: 21300000, guid: 3bbbafd9dc245e445b5c2f690e8ba13d, type: 3}
   - {fileID: 21300000, guid: b1ca51249a0abea40bafebf53366fc87, type: 3}
+  - {fileID: 21300000, guid: 248a951a63bbe484b872c4ffc0bd87bb, type: 3}
+  - {fileID: 21300000, guid: 913bd7f339961b34fb48c4034c51755d, type: 3}
   eventDescriptionText: {fileID: 1522259328}
   leftChoiceButtonText: {fileID: 297007619}
   rightChoiceButtonText: {fileID: 1563765999}
@@ -3409,7 +3403,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\xA300000"
+  m_Text: 
 --- !u!222 &1106269155
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4096,7 +4090,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: <b>Decision x/30</b> | Month Day, Year
+  m_Text: <b>Decision</b> | Month Day, Year
 --- !u!222 &1343967704
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5864,7 +5858,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Mood Status
+  m_Text: 
 --- !u!222 &2138518672
 CanvasRenderer:
   m_ObjectHideFlags: 0

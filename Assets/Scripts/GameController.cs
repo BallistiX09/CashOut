@@ -13,14 +13,16 @@ public class GameController : MonoBehaviour
     public static int currentStudyHours = 0;
     public static int currentDay = 0;
     public static string currentMonth = "";
-    public static bool showingSummary = false;
+    public static bool showingSummary = false, showingUncontrolledEvent = false;
     private bool soundsEnabled = true, musicEnabled = true;
     public static DateTime currentDate = System.DateTime.Now;
     public static RandomEvent currentEvent;
+    public static UncontrolledEvent currentUncontrolledEvent;
 
     public static bool carOwned = false, tvLicenceCancelled = false, payingCreditCard = false, payingPaydayLoan = false, payingLighthome = false, phoneInsurance = false, 
         betOnSports = false, playingLottery = false, buyingGameLater = false, payingFriendLoan = false, internetCancelled = false;
     public static int monthsLeftOnCC = 0, monthsLeftOnPDL = 0, monthsLeftOnLH = 0, monthsLeftOnFL = 0;
+    private bool[] uncontrolledEventUsed = new bool[10];
 
     private UIController UIController;
     private PlayerPerformance playerPerformance;
@@ -29,8 +31,8 @@ public class GameController : MonoBehaviour
 
     [SerializeField] private List<Debit> possibleDebits = new List<Debit>();
     [SerializeField] private List<Income> possibleIncome = new List<Income>();
-    [SerializeField] public static List<Debit> currentDebits = new List<Debit>();
-    [SerializeField] public static List<Income> currentIncome = new List<Income>();
+    [SerializeField] public List<Debit> currentDebits = new List<Debit>();
+    [SerializeField] public List<Income> currentIncome = new List<Income>();
 
     [SerializeField] private List<RandomEvent> currentEvents = new List<RandomEvent>(); //Event pool for use in gameplay, uses a mixture of mandatory and random events
     [SerializeField] private List<RandomEvent> mandatoryEvents = new List<RandomEvent>(); //Events which will always happen with every playthrough
@@ -46,7 +48,12 @@ public class GameController : MonoBehaviour
         currentMood = 0;
         currentStudyHours = 0;
         currentDay = 0;
+        currentDate = System.DateTime.Now;
         currentMonth = currentDate.ToString("MMMM");
+        currentEvent = null;
+        currentUncontrolledEvent = null;
+        showingSummary = false;
+        showingUncontrolledEvent = false;
 
         //Finds a reference to UI Controller and button click audio source
         UIController = FindObjectOfType<UIController>();
@@ -160,81 +167,116 @@ public class GameController : MonoBehaviour
 
             if (!showingSummary)
             {
-                CheckYesFollowUps();
-
-                //Update stats text, using animations and setting the new value after animation is complete
-                if (currentEvent.yesMoneyInstantEffect != 0)
+                if (showingUncontrolledEvent)
                 {
-                    switch (currentEvent.category)
+                    if(currentUncontrolledEvent.moneyInstantEffect != 0)
                     {
-                        case RandomEvent.Category.EDUCATION:
-                            playerPerformance.spentOnEducation += Math.Abs(currentEvent.yesMoneyInstantEffect);
-                            break;
-                        case RandomEvent.Category.ENTERTAINMENT:
-                            playerPerformance.spentOnEntertainment += Math.Abs(currentEvent.yesMoneyInstantEffect);
-                            break;
-                        case RandomEvent.Category.FINANCIAL:
-                            playerPerformance.spentOnFinancial += Math.Abs(currentEvent.yesMoneyInstantEffect);
-                            break;
-                        case RandomEvent.Category.FOOD:
-                            playerPerformance.spentOnFood += Math.Abs(currentEvent.yesMoneyInstantEffect);
-                            break;
-                        case RandomEvent.Category.GAMBLING:
-                            playerPerformance.spentOnGambling += Math.Abs(currentEvent.yesMoneyInstantEffect);
-                            break;
-                        case RandomEvent.Category.GAMING:
-                            playerPerformance.spentOnGaming += Math.Abs(currentEvent.yesMoneyInstantEffect);
-                            break;
-                        case RandomEvent.Category.SHOPPING:
-                            playerPerformance.spentOnShopping += Math.Abs(currentEvent.yesMoneyInstantEffect);
-                            break;
-                        case RandomEvent.Category.SOCIAL:
-                            playerPerformance.spentOnSocial += Math.Abs(currentEvent.yesMoneyInstantEffect);
-                            break;
-                        case RandomEvent.Category.TECHNOLOGY:
-                            playerPerformance.spentOnTechnology += Math.Abs(currentEvent.yesMoneyInstantEffect);
-                            break;
-                        case RandomEvent.Category.TRANSPORT:
-                            playerPerformance.spentOnTransport += Math.Abs(currentEvent.yesMoneyInstantEffect);
-                            break;
-                        case RandomEvent.Category.RENT:
-                            playerPerformance.spentOnRent += Math.Abs(currentEvent.yesMoneyInstantEffect);
-                            break;
-                        case RandomEvent.Category.WORK:
-                            break;
-                        default:
-                            Debug.LogWarning("Category not found");
-                            playerPerformance.spentOnFinancial += Math.Abs(currentEvent.yesMoneyInstantEffect);
-                            break;
+                        UIController.StartCoroutine("AnimateCashText", currentCash + currentUncontrolledEvent.moneyInstantEffect);
                     }
 
-                    UIController.StartCoroutine("AnimateCashText", currentCash + currentEvent.yesMoneyInstantEffect);
+                    if(currentUncontrolledEvent.moodEffect != 0)
+                    {
+                        currentMood = Mathf.Clamp(currentMood += currentUncontrolledEvent.moodEffect, -100, 100);
+                        UIController.UpdateMoodText(currentUncontrolledEvent.moodEffect);
+                    }
+
+                    if(currentUncontrolledEvent.studyEffect != 0)
+                    {
+                        UIController.StartCoroutine("AnimateStudyText", currentStudyHours + currentUncontrolledEvent.studyEffect);
+                    }
                 }
-
-                //Update mood value and mood text animation
-                if (currentEvent.yesMoodEffect != 0)
+                else
                 {
-                    if (currentEvent.yesMoodEffect > 0)
+                    CheckYesFollowUps();
+
+                    //Update stats text, using animations and setting the new value after animation is complete
+                    if (currentEvent.yesMoneyInstantEffect != 0)
                     {
-                        playerPerformance.moodIncreaseActions++;
-                    }
-                    else
-                    {
-                        playerPerformance.moodDecreaseActions++;
+                        switch (currentEvent.category)
+                        {
+                            case RandomEvent.Category.EDUCATION:
+                                playerPerformance.spentOnEducation += Math.Abs(currentEvent.yesMoneyInstantEffect);
+                                break;
+                            case RandomEvent.Category.ENTERTAINMENT:
+                                playerPerformance.spentOnEntertainment += Math.Abs(currentEvent.yesMoneyInstantEffect);
+                                break;
+                            case RandomEvent.Category.FINANCIAL:
+                                playerPerformance.spentOnFinancial += Math.Abs(currentEvent.yesMoneyInstantEffect);
+                                break;
+                            case RandomEvent.Category.FOOD:
+                                playerPerformance.spentOnFood += Math.Abs(currentEvent.yesMoneyInstantEffect);
+                                break;
+                            case RandomEvent.Category.GAMBLING:
+                                playerPerformance.spentOnGambling += Math.Abs(currentEvent.yesMoneyInstantEffect);
+                                break;
+                            case RandomEvent.Category.GAMING:
+                                playerPerformance.spentOnGaming += Math.Abs(currentEvent.yesMoneyInstantEffect);
+                                break;
+                            case RandomEvent.Category.SHOPPING:
+                                playerPerformance.spentOnShopping += Math.Abs(currentEvent.yesMoneyInstantEffect);
+                                break;
+                            case RandomEvent.Category.SOCIAL:
+                                playerPerformance.spentOnSocial += Math.Abs(currentEvent.yesMoneyInstantEffect);
+                                break;
+                            case RandomEvent.Category.TECHNOLOGY:
+                                playerPerformance.spentOnTechnology += Math.Abs(currentEvent.yesMoneyInstantEffect);
+                                break;
+                            case RandomEvent.Category.TRANSPORT:
+                                playerPerformance.spentOnTransport += Math.Abs(currentEvent.yesMoneyInstantEffect);
+                                break;
+                            case RandomEvent.Category.RENT:
+                                playerPerformance.spentOnRent += Math.Abs(currentEvent.yesMoneyInstantEffect);
+                                break;
+                            case RandomEvent.Category.WORK:
+                                break;
+                            default:
+                                Debug.LogWarning("Category not found");
+                                playerPerformance.spentOnFinancial += Math.Abs(currentEvent.yesMoneyInstantEffect);
+                                break;
+                        }
+
+                        UIController.StartCoroutine("AnimateCashText", currentCash + currentEvent.yesMoneyInstantEffect);
                     }
 
-                    currentMood = Mathf.Clamp(currentMood += currentEvent.yesMoodEffect, -100, 100);
-                    UIController.UpdateMoodText(currentEvent.yesMoodEffect);
-                }
+                    //Update mood value and mood text animation
+                    if (currentEvent.yesMoodEffect != 0)
+                    {
+                        if (currentEvent.yesMoodEffect > 0)
+                        {
+                            playerPerformance.moodIncreaseActions++;
+                        }
+                        else
+                        {
+                            playerPerformance.moodDecreaseActions++;
+                        }
 
-                if (currentEvent.yesStudyEffect != 0)
-                {
-                    UIController.StartCoroutine("AnimateStudyText", currentStudyHours + currentEvent.yesStudyEffect);
+                        currentMood = Mathf.Clamp(currentMood += currentEvent.yesMoodEffect, -100, 100);
+                        UIController.UpdateMoodText(currentEvent.yesMoodEffect);
+                    }
+
+                    if (currentEvent.yesStudyEffect != 0)
+                    {
+                        UIController.StartCoroutine("AnimateStudyText", currentStudyHours + currentEvent.yesStudyEffect);
+                    }
                 }
             }
 
             animationController.SetTrigger("CardsOut");
         }
+    }
+
+    public void UncontrolledEvent()
+    {
+        int eventNum = 0;
+
+        do
+        {
+            eventNum = UnityEngine.Random.Range(0, uncontrolledEvents.Count);
+        } while (uncontrolledEventUsed[eventNum] == true);
+
+        uncontrolledEventUsed[eventNum] = true;
+        currentUncontrolledEvent = uncontrolledEvents[eventNum];
+        UIController.UpdateUncontrolledEventInformation();
     }
 
     public void NextDay()
@@ -245,6 +287,12 @@ public class GameController : MonoBehaviour
         if (showingSummary)
         {
             UIController.HideSummary();
+        }
+
+        if (showingUncontrolledEvent)
+        {
+            UIController.HideUncontrolledEvent();
+            showingUncontrolledEvent = false;
         }
 
         int daysToIncrementBy = UnityEngine.Random.Range(3, 6);
@@ -289,8 +337,6 @@ public class GameController : MonoBehaviour
 
     private void NewMonth()
     {
-
-
         int incomeExpensesDifference = 0;
 
         foreach (Income income in currentIncome)

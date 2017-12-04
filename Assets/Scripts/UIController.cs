@@ -55,7 +55,7 @@ public class UIController : MonoBehaviour
             "Debt left on loan from friend: £" + playerPerformance.debtLeftOnFL().ToString() + "\n\n" +
             "Days spent in overdraft: " + playerPerformance.daysSpentInOverdraft.ToString() + "\n" +
             "Days spent unhappy: " + playerPerformance.daysSpentUnhappy.ToString() + "\n" +
-            "Days spent under 30 study hours: " + playerPerformance.daysSpentUnder30StudyHours.ToString();
+            "Days spent <30 study hours: " + playerPerformance.daysSpentUnder30StudyHours.ToString();
     }
 
     public void ShowSummary()
@@ -89,6 +89,19 @@ public class UIController : MonoBehaviour
         summaryTitle.gameObject.SetActive(false);
         summaryDetails.gameObject.SetActive(false);
 
+        buttonNo.gameObject.SetActive(true);
+        buttonYes.GetComponentInChildren<Text>().text = "YES";
+    }
+
+    public void ShowUncontrolledEvent()
+    {
+        buttonNo.gameObject.SetActive(false);
+        buttonYes.GetComponentInChildren<Text>().text = "DONE";
+        gameController.animationController.SetTrigger("CardsIn");
+    }
+
+    public void HideUncontrolledEvent()
+    {
         buttonNo.gameObject.SetActive(true);
         buttonYes.GetComponentInChildren<Text>().text = "YES";
     }
@@ -217,6 +230,24 @@ public class UIController : MonoBehaviour
         dateText.text = " <b>Decision " + (GameController.currentDay + 1).ToString() + "/30</b> | " + GameController.currentDate.ToString("MMMM d, yyyy");
     }
 
+    public void UpdateUncontrolledEventInformation()
+    {
+        eventTitleText.text = GameController.currentUncontrolledEvent.title;
+        eventDescriptionText.text = GameController.currentUncontrolledEvent.description;
+
+        switch (GameController.currentUncontrolledEvent.category)
+        {
+            case UncontrolledEvent.Category.UNCONTROLLED_GOOD:
+                eventImage.sprite = eventImageTypes[12];
+                break;
+            case UncontrolledEvent.Category.UNCONTROLLED_BAD:
+                eventImage.sprite = eventImageTypes[13];
+                break;
+        }
+
+        ShowUncontrolledEvent();
+    }
+
     //Updates the event text fields with current event stats information
     public void UpdateEventInformation()
     {
@@ -299,13 +330,16 @@ public class UIController : MonoBehaviour
     public void ShowDebits()
     {
         debitsPanel.SetActive(true);
+
+        incomesText.text = "";
+        debitsText.text = "";
         
-        foreach (Income income in GameController.currentIncome)
+        foreach (Income income in gameController.currentIncome)
         {
             incomesText.text += income.name + ": +£" + income.monthlyAmount + "\n\n";
         }
 
-        foreach (Debit debit in GameController.currentDebits)
+        foreach (Debit debit in gameController.currentDebits)
         {
             debitsText.text += debit.name + ": -£" + debit.monthlyCost.ToString().Substring(1, debit.monthlyCost.ToString().Length-1) + "\n\n";
         }
@@ -364,7 +398,15 @@ public class UIController : MonoBehaviour
     public void EndGame()
     {
         gameOverPanel.SetActive(true);
-        endMoneyText.text = "<b><color=#4eff95ff>Remaining Money: </color></b>£" + GameController.currentCash.ToString();
+
+        if (GameController.currentCash < 0)
+        {
+            endMoneyText.text = "<b><color=#4eff95ff>Remaining Money: </color></b>-£" + GameController.currentCash.ToString().Substring(1, GameController.currentCash.ToString().Length - 1);
+        }
+        else
+        {
+            endMoneyText.text = "<b><color=#4eff95ff>Remaining Money: </color></b>£" + GameController.currentCash.ToString();
+        }
         endMoodText.text = "<b><color=#4eff95ff>Final Mood: </color></b>" + GetMoodDescription();
         endStudyText.text = "<b><color=#4eff95ff>Final Study Hours: </color></b>" + GameController.currentStudyHours.ToString();
 

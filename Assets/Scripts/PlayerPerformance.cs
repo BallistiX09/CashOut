@@ -7,6 +7,13 @@ public class PlayerPerformance : MonoBehaviour
     public int moodIncreaseActions, moodDecreaseActions;
     public int daysSpentInOverdraft, daysSpentUnhappy, daysSpentUnder30StudyHours;
 
+    private GameController gameController;
+
+    private void Start()
+    {
+        gameController = FindObjectOfType<GameController>();
+    }
+
     public int debtLeftOnCC()
     {
         int debt = 0;
@@ -17,11 +24,11 @@ public class PlayerPerformance : MonoBehaviour
             {
                 GameController.monthsLeftOnCC--;
 
-                for (int j = 0; j < GameController.currentDebits.Count; j++)
+                for (int j = 0; j < gameController.currentDebits.Count; j++)
                 {
-                    if (GameController.currentDebits[j].name == "Credit Card")
+                    if (gameController.currentDebits[j].name == "Credit Card")
                     {
-                        debt += GameController.currentDebits[j].monthlyCost;
+                        debt += gameController.currentDebits[j].monthlyCost;
                     }
                 }
             }
@@ -40,11 +47,11 @@ public class PlayerPerformance : MonoBehaviour
             {
                 GameController.monthsLeftOnPDL--;
 
-                for (int j = 0; j < GameController.currentDebits.Count; j++)
+                for (int j = 0; j < gameController.currentDebits.Count; j++)
                 {
-                    if (GameController.currentDebits[j].name == "Payday Loan")
+                    if (gameController.currentDebits[j].name == "Payday Loan")
                     {
-                        debt += GameController.currentDebits[j].monthlyCost;
+                        debt += gameController.currentDebits[j].monthlyCost;
                     }
                 }
             }
@@ -63,11 +70,11 @@ public class PlayerPerformance : MonoBehaviour
             {
                 GameController.monthsLeftOnLH--;
 
-                for (int j = 0; j < GameController.currentDebits.Count; j++)
+                for (int j = 0; j < gameController.currentDebits.Count; j++)
                 {
-                    if (GameController.currentDebits[j].name == "Lighthome")
+                    if (gameController.currentDebits[j].name == "Lighthome")
                     {
-                        debt += GameController.currentDebits[j].monthlyCost;
+                        debt += gameController.currentDebits[j].monthlyCost;
                     }
                 }
             }
@@ -86,11 +93,11 @@ public class PlayerPerformance : MonoBehaviour
             {
                 GameController.monthsLeftOnFL--;
 
-                for (int j = 0; j < GameController.currentDebits.Count; j++)
+                for (int j = 0; j < gameController.currentDebits.Count; j++)
                 {
-                    if (GameController.currentDebits[j].name == "Loan From Friend")
+                    if (gameController.currentDebits[j].name == "Loan From Friend")
                     {
-                        debt += GameController.currentDebits[j].monthlyCost;
+                        debt += gameController.currentDebits[j].monthlyCost;
                     }
                 }
             }

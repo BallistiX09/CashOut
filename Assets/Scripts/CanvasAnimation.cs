@@ -13,6 +13,11 @@ public class CanvasAnimation : MonoBehaviour {
         {
             uiController.ShowSummary();
         }
+        else if ((Random.Range(1, 9) == 8) && !GameController.showingSummary && !GameController.showingUncontrolledEvent)
+        {
+            GameController.showingUncontrolledEvent = true;
+            gameController.UncontrolledEvent();
+        }
         else
         {
             gameController.NextDay();

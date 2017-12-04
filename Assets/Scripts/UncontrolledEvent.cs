@@ -10,7 +10,6 @@ public class UncontrolledEvent
     public Category category;
     public string description;
     public int moneyInstantEffect;
-    public int moneyMonthlyEffect;
     public int moodEffect;
     public int studyEffect;
 }
