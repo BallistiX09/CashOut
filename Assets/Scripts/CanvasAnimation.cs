@@ -5,9 +5,17 @@ using UnityEngine;
 public class CanvasAnimation : MonoBehaviour {
 
     [SerializeField] private GameController gameController;
+    [SerializeField] private UIController uiController;
 
     public void TriggerNextDay()
     {
-        gameController.NextDay();
+        if ((GameController.currentDay == 9 || GameController.currentDay == 19) && !GameController.showingSummary)
+        {
+            uiController.ShowSummary();
+        }
+        else
+        {
+            gameController.NextDay();
+        }
     }
 }

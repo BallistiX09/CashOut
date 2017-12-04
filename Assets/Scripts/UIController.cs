@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class UIController : MonoBehaviour
 {
     //References to game UI elements in Unity editor
+    private GameController gameController;
+    private PlayerPerformance playerPerformance;
     [SerializeField] private Text cashAmountText, moodAmountText, studyAmountText;
     [SerializeField] private Text dateText;
     [SerializeField] private Text eventTitleText;
@@ -15,13 +17,81 @@ public class UIController : MonoBehaviour
     [SerializeField] private Text leftChoiceButtonText, rightChoiceButtonText;
     [SerializeField] private Text endMoneyText, endMoodText, endStudyText;
     [SerializeField] private Text incomesText, debitsText;
-    [SerializeField] private GameObject gameOverPanel, debitsPanel;
+    [SerializeField] private Text summaryDetailsText;
+    [SerializeField] private GameObject summaryTitle, summaryDetails;
+    [SerializeField] private GameObject gameOverPanel, debitsPanel, backgroundPanel;
+    [SerializeField] private GameObject buttonNo, buttonYes;
     [SerializeField] private Animator statCashTitleAnim, statCashAmountAnim;
     [SerializeField] private Animator statMoodTitleAnim, statMoodAmountAnim;
     [SerializeField] private Animator statStudyTitleAnim, statStudyAmountAnim;
 
-    //Animate the text field incrementing or decrementing to the new value
-    //Using an IEnumerator/Coroutine to allow the game to run without waiting on the loop to finish
+    private void Start()
+    {
+        gameController = FindObjectOfType<GameController>();
+        playerPerformance = FindObjectOfType<PlayerPerformance>();
+    }
+
+    public string GenerateSummaryText()
+    {
+        return "Earned from student loan: £" + playerPerformance.earnedFromStudentLoan.ToString() + "\n" +
+            "Earned from work: £" + playerPerformance.earnedFromWork.ToString() + "\n" +
+            "Earned from overtime: £" + playerPerformance.earnedFromOvertime.ToString() + "\n\n" +
+            "Spent on transport: £" + playerPerformance.spentOnTransport.ToString() + "\n" +
+            "Spent on entertainment: £" + playerPerformance.spentOnEntertainment.ToString() + "\n" +
+            "Spent on financial: £" + playerPerformance.spentOnFinancial.ToString() + "\n" +
+            "Spent on food: £" + playerPerformance.spentOnFood.ToString() + "\n" +
+            "Spent on gambling: £" + playerPerformance.spentOnGambling.ToString() + "\n" +
+            "Spent on shopping: £" + playerPerformance.spentOnShopping.ToString() + "\n" +
+            "Spent on social: £" + playerPerformance.spentOnSocial.ToString() + "\n" +
+            "Spent on technology: £" + playerPerformance.spentOnTechnology.ToString() + "\n" +
+            "Spent on gaming: £" + playerPerformance.spentOnGaming.ToString() + "\n" +
+            "Spent on education: £" + playerPerformance.spentOnEducation.ToString() + "\n" +
+            "Spent on rent: £" + playerPerformance.spentOnRent.ToString() + "\n\n" +
+            "Debt left on credit card: £" + playerPerformance.debtLeftOnCC().ToString() + "\n" +
+            "Debt left on payday loan: £" + playerPerformance.debtLeftOnPDL().ToString() + "\n" +
+            "Debt left on LightHome purchase: £" + playerPerformance.debtLeftOnLH().ToString() + "\n" +
+            "Debt left on loan from friend: £" + playerPerformance.debtLeftOnFL().ToString() + "\n\n" +
+            "Days spent in overdraft: " + playerPerformance.daysSpentInOverdraft.ToString() + "\n" +
+            "Days spent unhappy: " + playerPerformance.daysSpentUnhappy.ToString() + "\n" +
+            "Days spent under 30 study hours: " + playerPerformance.daysSpentUnder30StudyHours.ToString();
+    }
+
+    public void ShowSummary()
+    {
+        GameController.showingSummary = true;
+
+        dateText.gameObject.SetActive(false);
+        eventTitleText.gameObject.SetActive(false);
+        eventImage.transform.parent.gameObject.SetActive(false);
+        eventDescriptionText.gameObject.SetActive(false);
+
+        summaryTitle.gameObject.SetActive(true);
+        summaryDetails.gameObject.SetActive(true);
+
+        buttonNo.gameObject.SetActive(false);
+        buttonYes.GetComponentInChildren<Text>().text = "DONE";
+        summaryDetailsText.text = GenerateSummaryText();
+
+        gameController.animationController.SetTrigger("CardsIn");
+    }
+
+    public void HideSummary()
+    {
+        GameController.showingSummary = false;
+
+        dateText.gameObject.SetActive(true);
+        eventTitleText.gameObject.SetActive(true);
+        eventImage.transform.parent.gameObject.SetActive(true);
+        eventDescriptionText.gameObject.SetActive(true);
+
+        summaryTitle.gameObject.SetActive(false);
+        summaryDetails.gameObject.SetActive(false);
+
+        buttonNo.gameObject.SetActive(true);
+        buttonYes.GetComponentInChildren<Text>().text = "YES";
+    }
+
+    //Animate the text field incrementing or decrementing to the new value, using an IEnumerator/Coroutine to allow the game to run without waiting on the loop to finish
     public IEnumerator AnimateCashText(int targetCash)
     {
         //Set the starting text amount before animation begins

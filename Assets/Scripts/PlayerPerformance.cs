@@ -3,7 +3,7 @@
 public class PlayerPerformance : MonoBehaviour
 {
     public int earnedFromStudentLoan, earnedFromWork, earnedFromOvertime;
-    public int spentOnTransport, spentOnEntertainment, spentOnFinancial, spentOnFood, spentOnWork, spentOnGambling, spentOnShopping, spentOnSocial, spentOnTechnology, spentOnGaming, spentOnEducation, spentOnRent;
+    public int spentOnTransport, spentOnEntertainment, spentOnFinancial, spentOnFood, spentOnGambling, spentOnShopping, spentOnSocial, spentOnTechnology, spentOnGaming, spentOnEducation, spentOnRent;
     public int moodIncreaseActions, moodDecreaseActions;
     public int daysSpentInOverdraft, daysSpentUnhappy, daysSpentUnder30StudyHours;
 

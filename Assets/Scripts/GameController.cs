@@ -13,6 +13,7 @@ public class GameController : MonoBehaviour
     public static int currentStudyHours = 0;
     public static int currentDay = 0;
     public static string currentMonth = "";
+    public static bool showingSummary = false;
     private bool soundsEnabled = true, musicEnabled = true;
     public static DateTime currentDate = System.DateTime.Now;
     public static RandomEvent currentEvent;
@@ -24,7 +25,7 @@ public class GameController : MonoBehaviour
     private UIController UIController;
     private PlayerPerformance playerPerformance;
     private AudioSource buttonClickAudioSource;
-    [SerializeField] private Animator animationController;
+    [SerializeField] public Animator animationController;
 
     [SerializeField] private List<Debit> possibleDebits = new List<Debit>();
     [SerializeField] private List<Income> possibleIncome = new List<Income>();
@@ -112,9 +113,6 @@ public class GameController : MonoBehaviour
                     case RandomEvent.Category.TRANSPORT:
                         playerPerformance.spentOnTransport += Math.Abs(currentEvent.noMoneyInstantEffect);
                         break;
-                    case RandomEvent.Category.WORK:
-                        playerPerformance.spentOnWork += Math.Abs(currentEvent.noMoneyInstantEffect);
-                        break;
                     case RandomEvent.Category.RENT:
                         playerPerformance.spentOnRent += Math.Abs(currentEvent.noMoneyInstantEffect);
                         break;
@@ -158,77 +156,77 @@ public class GameController : MonoBehaviour
         {
             PlayButtonClickSound();
 
-            CheckYesFollowUps();
-
-            //Update stats text, using animations and setting the new value after animation is complete
-            if (currentEvent.yesMoneyInstantEffect != 0)
+            if (!showingSummary)
             {
-                switch (currentEvent.category)
+                CheckYesFollowUps();
+
+                //Update stats text, using animations and setting the new value after animation is complete
+                if (currentEvent.yesMoneyInstantEffect != 0)
                 {
-                    case RandomEvent.Category.EDUCATION:
-                        playerPerformance.spentOnEducation += Math.Abs(currentEvent.yesMoneyInstantEffect);
-                        break;
-                    case RandomEvent.Category.ENTERTAINMENT:
-                        playerPerformance.spentOnEntertainment += Math.Abs(currentEvent.yesMoneyInstantEffect);
-                        break;
-                    case RandomEvent.Category.FINANCIAL:
-                        playerPerformance.spentOnFinancial += Math.Abs(currentEvent.yesMoneyInstantEffect);
-                        break;
-                    case RandomEvent.Category.FOOD:
-                        playerPerformance.spentOnFood += Math.Abs(currentEvent.yesMoneyInstantEffect);
-                        break;
-                    case RandomEvent.Category.GAMBLING:
-                        playerPerformance.spentOnGambling += Math.Abs(currentEvent.yesMoneyInstantEffect);
-                        break;
-                    case RandomEvent.Category.GAMING:
-                        playerPerformance.spentOnGaming += Math.Abs(currentEvent.yesMoneyInstantEffect);
-                        break;
-                    case RandomEvent.Category.SHOPPING:
-                        playerPerformance.spentOnShopping += Math.Abs(currentEvent.yesMoneyInstantEffect);
-                        break;
-                    case RandomEvent.Category.SOCIAL:
-                        playerPerformance.spentOnSocial += Math.Abs(currentEvent.yesMoneyInstantEffect);
-                        break;
-                    case RandomEvent.Category.TECHNOLOGY:
-                        playerPerformance.spentOnTechnology += Math.Abs(currentEvent.yesMoneyInstantEffect);
-                        break;
-                    case RandomEvent.Category.TRANSPORT:
-                        playerPerformance.spentOnTransport += Math.Abs(currentEvent.yesMoneyInstantEffect);
-                        break;
-                    case RandomEvent.Category.WORK:
-                        playerPerformance.spentOnWork += Math.Abs(currentEvent.yesMoneyInstantEffect);
-                        break;
-                    case RandomEvent.Category.RENT:
-                        playerPerformance.spentOnRent += Math.Abs(currentEvent.yesMoneyInstantEffect);
-                        break;
-                    default:
-                        Debug.LogWarning("Category not found");
-                        playerPerformance.spentOnFinancial += Math.Abs(currentEvent.yesMoneyInstantEffect);
-                        break;
+                    switch (currentEvent.category)
+                    {
+                        case RandomEvent.Category.EDUCATION:
+                            playerPerformance.spentOnEducation += Math.Abs(currentEvent.yesMoneyInstantEffect);
+                            break;
+                        case RandomEvent.Category.ENTERTAINMENT:
+                            playerPerformance.spentOnEntertainment += Math.Abs(currentEvent.yesMoneyInstantEffect);
+                            break;
+                        case RandomEvent.Category.FINANCIAL:
+                            playerPerformance.spentOnFinancial += Math.Abs(currentEvent.yesMoneyInstantEffect);
+                            break;
+                        case RandomEvent.Category.FOOD:
+                            playerPerformance.spentOnFood += Math.Abs(currentEvent.yesMoneyInstantEffect);
+                            break;
+                        case RandomEvent.Category.GAMBLING:
+                            playerPerformance.spentOnGambling += Math.Abs(currentEvent.yesMoneyInstantEffect);
+                            break;
+                        case RandomEvent.Category.GAMING:
+                            playerPerformance.spentOnGaming += Math.Abs(currentEvent.yesMoneyInstantEffect);
+                            break;
+                        case RandomEvent.Category.SHOPPING:
+                            playerPerformance.spentOnShopping += Math.Abs(currentEvent.yesMoneyInstantEffect);
+                            break;
+                        case RandomEvent.Category.SOCIAL:
+                            playerPerformance.spentOnSocial += Math.Abs(currentEvent.yesMoneyInstantEffect);
+                            break;
+                        case RandomEvent.Category.TECHNOLOGY:
+                            playerPerformance.spentOnTechnology += Math.Abs(currentEvent.yesMoneyInstantEffect);
+                            break;
+                        case RandomEvent.Category.TRANSPORT:
+                            playerPerformance.spentOnTransport += Math.Abs(currentEvent.yesMoneyInstantEffect);
+                            break;
+                        case RandomEvent.Category.RENT:
+                            playerPerformance.spentOnRent += Math.Abs(currentEvent.yesMoneyInstantEffect);
+                            break;
+                        default:
+                            Debug.LogWarning("Category not found");
+                            playerPerformance.spentOnFinancial += Math.Abs(currentEvent.yesMoneyInstantEffect);
+                            break;
+                    }
+
+                    UIController.StartCoroutine("AnimateCashText", currentCash + currentEvent.yesMoneyInstantEffect);
                 }
 
-                UIController.StartCoroutine("AnimateCashText", currentCash + currentEvent.yesMoneyInstantEffect);
-            }
-
-            //Update mood value and mood text animation
-            if (currentEvent.yesMoodEffect != 0)
-            {
-                if (currentEvent.yesMoodEffect > 0)
+                //Update mood value and mood text animation
+                if (currentEvent.yesMoodEffect != 0)
                 {
-                    playerPerformance.moodIncreaseActions++;
+                    if (currentEvent.yesMoodEffect > 0)
+                    {
+                        playerPerformance.moodIncreaseActions++;
+                    }
+                    else
+                    {
+                        playerPerformance.moodDecreaseActions++;
+                    }
+
+                    currentMood = Mathf.Clamp(currentMood += currentEvent.yesMoodEffect, -100, 100);
+                    UIController.UpdateMoodText(currentEvent.yesMoodEffect);
                 }
-                else
+
+                if (currentEvent.yesStudyEffect != 0)
                 {
-                    playerPerformance.moodDecreaseActions++;
+                    UIController.StartCoroutine("AnimateStudyText", currentStudyHours + currentEvent.yesStudyEffect);
                 }
-
-                currentMood = Mathf.Clamp(currentMood += currentEvent.yesMoodEffect, -100, 100);
-                UIController.UpdateMoodText(currentEvent.yesMoodEffect);
-            }
-
-            if (currentEvent.yesStudyEffect != 0)
-            {
-                UIController.StartCoroutine("AnimateStudyText", currentStudyHours + currentEvent.yesStudyEffect);
             }
 
             animationController.SetTrigger("CardsOut");
@@ -240,24 +238,29 @@ public class GameController : MonoBehaviour
         //30 interactive days total, with random non-interactive events mixed throughout and 5 trivia questions
         currentDay++;
 
-        if(currentDay == 30)
+        if (showingSummary)
+        {
+            UIController.HideSummary();
+        }
+
+        if (currentDay == 30)
         {
             UIController.EndGame();
         }
 
         int daysToIncrementBy = UnityEngine.Random.Range(3, 6);
 
-        if(currentCash < 0)
+        if (currentCash < 0)
         {
             playerPerformance.daysSpentInOverdraft += daysToIncrementBy;
         }
 
-        if(currentMood <= -40)
+        if (currentMood <= -40)
         {
             playerPerformance.daysSpentUnhappy += daysToIncrementBy;
         }
 
-        if(currentStudyHours < 30)
+        if (currentStudyHours < 30)
         {
             playerPerformance.daysSpentUnder30StudyHours += daysToIncrementBy;
         }
@@ -268,7 +271,7 @@ public class GameController : MonoBehaviour
         UIController.UpdateDateText();
         UIController.UpdateEventInformation();
 
-        if(currentMonth != currentDate.ToString("MMMM"))
+        if (currentMonth != currentDate.ToString("MMMM"))
         {
             currentMonth = currentDate.ToString("MMMM");
             NewMonth();
@@ -279,6 +282,8 @@ public class GameController : MonoBehaviour
 
     private void NewMonth()
     {
+
+
         int incomeExpensesDifference = 0;
 
         foreach (Income income in currentIncome)
@@ -338,9 +343,6 @@ public class GameController : MonoBehaviour
                     break;
                 case Debit.Category.TRANSPORT:
                     playerPerformance.spentOnTransport += Math.Abs(debit.monthlyCost);
-                    break;
-                case Debit.Category.WORK:
-                    playerPerformance.spentOnWork += Math.Abs(debit.monthlyCost);
                     break;
                 case Debit.Category.RENT:
                     playerPerformance.spentOnRent += Math.Abs(debit.monthlyCost);
