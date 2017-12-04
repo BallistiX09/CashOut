@@ -16,11 +16,13 @@ public class UIController : MonoBehaviour
     [SerializeField] private Text eventDescriptionText;
     [SerializeField] private Text leftChoiceButtonText, rightChoiceButtonText;
     [SerializeField] private Text endMoneyText, endMoodText, endStudyText;
+    [SerializeField] private Text endMoneySpentText, endDebtRemainingText, endDaysInOverdraftText;
     [SerializeField] private Text incomesText, debitsText;
-    [SerializeField] private Text summaryDetailsText;
-    [SerializeField] private GameObject summaryTitle, summaryDetails;
+    [SerializeField] private Text summaryDetailsText, endSummaryDetailsText;
+    [SerializeField] private GameObject summaryTitle, summaryDetails, endSummaryDetails;
     [SerializeField] private GameObject gameOverPanel, debitsPanel, backgroundPanel;
-    [SerializeField] private GameObject buttonNo, buttonYes;
+    [SerializeField] private GameObject endMoneySpent, endDebtRemaining, endDaysInOverdraft;
+    [SerializeField] private GameObject buttonNo, buttonYes, endButtonDetails;
     [SerializeField] private Animator statCashTitleAnim, statCashAmountAnim;
     [SerializeField] private Animator statMoodTitleAnim, statMoodAmountAnim;
     [SerializeField] private Animator statStudyTitleAnim, statStudyAmountAnim;
@@ -89,6 +91,22 @@ public class UIController : MonoBehaviour
 
         buttonNo.gameObject.SetActive(true);
         buttonYes.GetComponentInChildren<Text>().text = "YES";
+    }
+
+    public void ShowFinalSummaryDetails()
+    {
+        endMoneyText.gameObject.SetActive(false);
+        endMoodText.gameObject.SetActive(false);
+        endStudyText.gameObject.SetActive(false);
+        endMoneySpent.gameObject.SetActive(false);
+        endMoneySpentText.gameObject.SetActive(false);
+        endDebtRemaining.gameObject.SetActive(false);
+        endDebtRemainingText.gameObject.SetActive(false);
+        endDaysInOverdraft.gameObject.SetActive(false);
+        endDaysInOverdraftText.gameObject.SetActive(false);
+        endButtonDetails.gameObject.SetActive(false);
+        endSummaryDetails.gameObject.SetActive(true);
+        endSummaryDetailsText.text = GenerateSummaryText();
     }
 
     //Animate the text field incrementing or decrementing to the new value, using an IEnumerator/Coroutine to allow the game to run without waiting on the loop to finish
@@ -293,11 +311,65 @@ public class UIController : MonoBehaviour
         }
     }
 
+    public string GetHighestSpendingCategory()
+    {
+        int highestCategory = -1;
+        int highestAmount = 0;
+        int[] categories = new int[] {playerPerformance.spentOnEducation, playerPerformance.spentOnEntertainment, playerPerformance.spentOnFinancial, playerPerformance.spentOnFood, playerPerformance.spentOnGambling,
+            playerPerformance.spentOnGaming, playerPerformance.spentOnRent, playerPerformance.spentOnShopping, playerPerformance.spentOnSocial, playerPerformance.spentOnTechnology, playerPerformance.spentOnTransport };
+
+        for (int i = 0; i < categories.Length; i++)
+        {
+            if (categories[i] > highestAmount)
+            {
+                highestCategory = i;
+            }
+        }
+
+        switch (highestCategory)
+        {
+            case 0:
+                return "Education";
+            case 1:
+                return "Entertainment";
+            case 2:
+                return "Financial";
+            case 3:
+                return "Food";
+            case 4:
+                return "Gambling";
+            case 5:
+                return "Gaming";
+            case 6:
+                return "Rent";
+            case 7:
+                return "Shopping";
+            case 8:
+                return "Social";
+            case 9:
+                return "Technology";
+            case 10:
+                return "Transport";
+            default:
+                Debug.LogWarning("Category not found");
+                return "Financial";
+        }
+    }
+
+    public int GetRemainingDebt()
+    {
+        return playerPerformance.debtLeftOnCC() + playerPerformance.debtLeftOnFL() + playerPerformance.debtLeftOnLH() + playerPerformance.debtLeftOnPDL();
+    }
+
     public void EndGame()
     {
         gameOverPanel.SetActive(true);
-        endMoneyText.text = "Money: " + GameController.currentCash.ToString();
-        endMoodText.text = "Mood: " + GetMoodDescription();
-        endStudyText.text = "Study Hours: " + GameController.currentStudyHours.ToString();
+        endMoneyText.text = "<b><color=#4eff95ff>Remaining Money: </color></b>£" + GameController.currentCash.ToString();
+        endMoodText.text = "<b><color=#4eff95ff>Final Mood: </color></b>" + GetMoodDescription();
+        endStudyText.text = "<b><color=#4eff95ff>Final Study Hours: </color></b>" + GameController.currentStudyHours.ToString();
+
+        endMoneySpentText.text = GetHighestSpendingCategory();
+        endDebtRemainingText.text = "£" + Math.Abs(GetRemainingDebt()).ToString();
+        endDaysInOverdraftText.text = playerPerformance.daysSpentInOverdraft.ToString() + " days";
     }
 }

@@ -116,6 +116,8 @@ public class GameController : MonoBehaviour
                     case RandomEvent.Category.RENT:
                         playerPerformance.spentOnRent += Math.Abs(currentEvent.noMoneyInstantEffect);
                         break;
+                    case RandomEvent.Category.WORK:
+                        break;
                     default:
                         Debug.LogWarning("Category not found");
                         playerPerformance.spentOnFinancial += Math.Abs(currentEvent.noMoneyInstantEffect);
@@ -198,6 +200,8 @@ public class GameController : MonoBehaviour
                         case RandomEvent.Category.RENT:
                             playerPerformance.spentOnRent += Math.Abs(currentEvent.yesMoneyInstantEffect);
                             break;
+                        case RandomEvent.Category.WORK:
+                            break;
                         default:
                             Debug.LogWarning("Category not found");
                             playerPerformance.spentOnFinancial += Math.Abs(currentEvent.yesMoneyInstantEffect);
@@ -243,11 +247,6 @@ public class GameController : MonoBehaviour
             UIController.HideSummary();
         }
 
-        if (currentDay == 30)
-        {
-            UIController.EndGame();
-        }
-
         int daysToIncrementBy = UnityEngine.Random.Range(3, 6);
 
         if (currentCash < 0)
@@ -265,19 +264,27 @@ public class GameController : MonoBehaviour
             playerPerformance.daysSpentUnder30StudyHours += daysToIncrementBy;
         }
 
-        currentDate = currentDate.AddDays(daysToIncrementBy);
-        currentEvent = currentEvents[currentDay];
-
-        UIController.UpdateDateText();
-        UIController.UpdateEventInformation();
-
-        if (currentMonth != currentDate.ToString("MMMM"))
+        if (currentDay < 30)
         {
-            currentMonth = currentDate.ToString("MMMM");
-            NewMonth();
+            currentDate = currentDate.AddDays(daysToIncrementBy);
+            currentEvent = currentEvents[currentDay];
+            UIController.UpdateDateText();
+            UIController.UpdateEventInformation();
+
+            if (currentMonth != currentDate.ToString("MMMM"))
+            {
+                currentMonth = currentDate.ToString("MMMM");
+                NewMonth();
+            }
+
+            animationController.SetTrigger("CardsIn");
         }
 
-        animationController.SetTrigger("CardsIn");
+        if (currentDay == 30)
+        {
+            UIController.EndGame();
+        }
+
     }
 
     private void NewMonth()
@@ -346,6 +353,8 @@ public class GameController : MonoBehaviour
                     break;
                 case Debit.Category.RENT:
                     playerPerformance.spentOnRent += Math.Abs(debit.monthlyCost);
+                    break;
+                case Debit.Category.WORK:
                     break;
                 default:
                     Debug.LogWarning("Category not found");
@@ -710,5 +719,10 @@ public class GameController : MonoBehaviour
     public void MenuButtonPressed()
     {
         SceneManager.LoadScene(0);
+    }
+
+    public void DetailsButtonPressed()
+    {
+        UIController.ShowFinalSummaryDetails();
     }
 }
