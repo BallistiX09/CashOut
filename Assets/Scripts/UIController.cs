@@ -8,21 +8,28 @@ public class UIController : MonoBehaviour
     //References to game UI elements in Unity editor
     private GameController gameController;
     private PlayerPerformance playerPerformance;
+    private DatabaseController databaseController;
+
     [SerializeField] private Text cashAmountText, moodAmountText, studyAmountText;
+
     [SerializeField] private Text dateText;
     [SerializeField] private Text eventTitleText;
     [SerializeField] private Image eventImage;
     [SerializeField] private Sprite[] eventImageTypes;
     [SerializeField] private Text eventDescriptionText;
     [SerializeField] private Text leftChoiceButtonText, rightChoiceButtonText;
+
     [SerializeField] private Text endMoneyText, endMoodText, endStudyText;
     [SerializeField] private Text endMoneySpentText, endDebtRemainingText, endDaysInOverdraftText;
+
     [SerializeField] private Text incomesText, debitsText;
     [SerializeField] private Text summaryDetailsText, endSummaryDetailsText;
     [SerializeField] private GameObject summaryTitle, summaryDetails, endSummaryDetails;
+
     [SerializeField] private GameObject gameOverPanel, debitsPanel, backgroundPanel;
     [SerializeField] private GameObject endMoneySpent, endDebtRemaining, endDaysInOverdraft;
     [SerializeField] private GameObject buttonNo, buttonYes, endButtonDetails;
+
     [SerializeField] private Animator statCashTitleAnim, statCashAmountAnim;
     [SerializeField] private Animator statMoodTitleAnim, statMoodAmountAnim;
     [SerializeField] private Animator statStudyTitleAnim, statStudyAmountAnim;
@@ -30,6 +37,7 @@ public class UIController : MonoBehaviour
     private void Start()
     {
         gameController = FindObjectOfType<GameController>();
+        databaseController = FindObjectOfType<DatabaseController>();
         playerPerformance = FindObjectOfType<PlayerPerformance>();
     }
 
@@ -421,5 +429,7 @@ public class UIController : MonoBehaviour
         endMoneySpentText.text = GetHighestSpendingCategory();
         endDebtRemainingText.text = "£" + Math.Abs(GetRemainingDebt()).ToString();
         endDaysInOverdraftText.text = playerPerformance.daysSpentInOverdraft.ToString() + " days";
+
+        databaseController.SubmitResultsToDatabase();
     }
 }
