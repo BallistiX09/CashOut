@@ -336,13 +336,21 @@ public class UIController : MonoBehaviour
         
         foreach (Income income in gameController.currentIncome)
         {
-            incomesText.text += income.name + ": +£" + income.monthlyAmount + "\n\n";
+            incomesText.text += income.name + ": £" + income.monthlyAmount + "\n\n";
         }
 
         foreach (Debit debit in gameController.currentDebits)
         {
             debitsText.text += debit.name + ": -£" + debit.monthlyCost.ToString().Substring(1, debit.monthlyCost.ToString().Length-1) + "\n\n";
         }
+
+        incomesText.text = incomesText.text.Substring(0, incomesText.text.Length - 2);
+        debitsText.text = debitsText.text.Substring(0, debitsText.text.Length - 2);
+    }
+
+    public void HideDebits()
+    {
+        debitsPanel.SetActive(false);
     }
 
     public string GetHighestSpendingCategory()
