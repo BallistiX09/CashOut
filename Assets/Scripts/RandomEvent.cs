@@ -1,4 +1,6 @@
 ﻿//RandomEvent containing a title, image, and description
+using UnityEngine;
+
 [System.Serializable]
 public class RandomEvent
 {
@@ -9,7 +11,7 @@ public class RandomEvent
     public int ID;
     public string title;
     public Category category;
-    public string description;
+    [TextArea] public string description;
     public int yesMoneyInstantEffect;
     public int yesMoneyMonthlyEffect;
     public int yesMoodEffect;

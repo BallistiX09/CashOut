@@ -200,7 +200,7 @@ public class UIController : MonoBehaviour
     {
         cashAmountText.text = "£" + GameController.currentCash.ToString();
         moodAmountText.text = GetMoodDescription();
-        studyAmountText.text = GameController.currentStudyHours.ToString();
+        studyAmountText.text = GameController.currentStudyHours.ToString() + " / 40";
     }
 
     //Used to update the cash text only without affecting the mood text
@@ -229,7 +229,7 @@ public class UIController : MonoBehaviour
 
     public void UpdateStudyText()
     {
-        studyAmountText.text = GameController.currentStudyHours.ToString();
+        studyAmountText.text = GameController.currentStudyHours.ToString() + " / 40";
     }
 
     //Updates the date text field with current game date information
@@ -424,7 +424,7 @@ public class UIController : MonoBehaviour
             endMoneyText.text = "<b><color=#4eff95ff>Remaining Money: </color></b>£" + GameController.currentCash.ToString();
         }
         endMoodText.text = "<b><color=#4eff95ff>Final Mood: </color></b>" + GetMoodDescription();
-        endStudyText.text = "<b><color=#4eff95ff>Final Study Hours: </color></b>" + GameController.currentStudyHours.ToString();
+        endStudyText.text = "<b><color=#4eff95ff>Final Study Hours: </color></b>" + GameController.currentStudyHours.ToString() + " / 40";
 
         endMoneySpentText.text = GetHighestSpendingCategory();
         endDebtRemainingText.text = "£" + Math.Abs(GetRemainingDebt()).ToString();
