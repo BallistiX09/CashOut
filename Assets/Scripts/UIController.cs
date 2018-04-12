@@ -8,7 +8,6 @@ public class UIController : MonoBehaviour
     //References to game UI elements in Unity editor
     private GameController gameController;
     private PlayerPerformance playerPerformance;
-    private DatabaseController databaseController;
 
     [SerializeField] private Text cashAmountText, moodAmountText, studyAmountText;
 
@@ -37,7 +36,6 @@ public class UIController : MonoBehaviour
     private void Start()
     {
         gameController = FindObjectOfType<GameController>();
-        databaseController = FindObjectOfType<DatabaseController>();
         playerPerformance = FindObjectOfType<PlayerPerformance>();
     }
 
@@ -429,7 +427,5 @@ public class UIController : MonoBehaviour
         endMoneySpentText.text = GetHighestSpendingCategory();
         endDebtRemainingText.text = "£" + Math.Abs(GetRemainingDebt()).ToString();
         endDaysInOverdraftText.text = playerPerformance.daysSpentInOverdraft.ToString() + " days";
-
-        databaseController.SubmitResultsToDatabase();
     }
 }
